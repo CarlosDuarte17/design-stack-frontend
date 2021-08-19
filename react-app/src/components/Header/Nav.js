@@ -1,66 +1,39 @@
 import React from 'react'
 import {
-    Link,
     Flex,
     UnorderedList,
-    ListItem 
+    Link
 } 
 from '@chakra-ui/react';
+import { Link as ReactLink } from 'react-router-dom'
 
 import { Logo } from '../../assets/icons/Logo';
+import { NavLink } from './NavLink'
 
 export default function Nav() {
     return (
         <>
           <Flex alignItems="center">
-            <Logo />
+            <Link as={ReactLink} cursor="pointer" outline="none" to="/">
+              <Logo />
+            </Link>
             <Flex as="nav">
             <UnorderedList display="flex" fontWeight={500} color="#6e6d7a" fontSize="0.875rem" styleType="none">
-              <ListItem paddingInline="4">
-                <Link 
-                  fontWeight="semibold"
-                  textDecorationStyle="none"
-                  _hover={{ color: 'pink.500', textDecorationLine: 'none' }}
-                >
+              <NavLink>
                   Inspiration
-                </Link>
-              </ListItem>
-              <ListItem paddingInline="4">
-                <Link 
-                  fontWeight="semibold"
-                  textDecorationStyle="none"
-                  _hover={{ color: 'pink.500', textDecorationLine: 'none' }}
-                  >
-                    Find Work
-                </Link>
-              </ListItem>
-              <ListItem paddingInline="4">
-                <Link 
-                  fontWeight="semibold"
-                  textDecorationStyle="none"
-                  _hover={{ color: 'pink.500', textDecorationLine: 'none' }}
-                >
-                  Learn Design
-                </Link>
-              </ListItem>
-              <ListItem paddingInline="4">
-                <Link 
-                  fontWeight="semibold"
-                  textDecorationStyle="none"
-                  _hover={{ color: 'pink.500', textDecorationLine: 'none' }}
-                >
+              </NavLink>
+              <NavLink>
+                Find Work
+              </NavLink>
+              <NavLink>
+                Learn Design
+              </NavLink>
+              <NavLink >
                   Go Pro
-                </Link>
-              </ListItem>
-              <ListItem paddingInline="4">
-                <Link 
-                  fontWeight="semibold"
-                  textDecorationStyle="none"
-                  _hover={{ color: 'pink.500', textDecorationLine: 'none' }}
-                >
+              </NavLink>
+              <NavLink>
                   Hire Designers
-                </Link>
-              </ListItem>
+              </NavLink>
             </UnorderedList>
             </Flex>
           </Flex>  

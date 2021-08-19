@@ -1,4 +1,8 @@
-import React from 'react'
+import * as React from 'react';
+import { SearchIcon } from '@chakra-ui/icons'
+import { Suspense } from 'react';
+import { Link as ReactLink } from 'react-router-dom';
+
 import {
   Flex,
   InputGroup,
@@ -6,11 +10,12 @@ import {
   Input,
   UnorderedList,
   ListItem,
-  Avatar,
-  Button
+  Button,
+  Spinner
 }
   from '@chakra-ui/react';
-import { SearchIcon } from '@chakra-ui/icons'
+
+import { UserImage } from './UserImage';
 import { WorkIcon } from '../../assets/icons/Icons';
 
 export default function NavRight() {
@@ -42,10 +47,12 @@ export default function NavRight() {
             <WorkIcon color="gray.400" cursor="pointer" h="20px" w="20px" />
           </ListItem>
           <ListItem marginInline="10px">
-            <Avatar bgColor="blue.500" h="32px" name="Carlos" src="https://bit.ly/tioluwani-kolawole" width="32px" />
+              <Suspense fallback={ <Spinner /> }>
+                <UserImage />
+              </Suspense>
           </ListItem>
-          <ListItem marginInline="10px">
-            <Button cursor="pointer" as="a" colorScheme="pink" fontSize="0.875rem">Upload</Button>
+          <ListItem marginInlineStart="10px">
+            <Button cursor="pointer" as={ReactLink} colorScheme="pink" fontSize="0.875rem" to="/uploads/new">Upload</Button>
           </ListItem>
         </UnorderedList>
 
