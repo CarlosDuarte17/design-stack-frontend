@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\UserController;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +18,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::get('/user', function (Request $request) {
+    return response()->json([
+        'token' => User::findOrFail(1)->createToken('secure_token')->plainTextToken,
+        'message' => 'Success'
+    ]);
 });
+//
+//Route::apiResource('users', UserController::class)
+//    ->only(['index', 'show'])
+//    ->middleware('auth:sanctum');
+
+//Route::post('/login', [LoginController::class, 'login']);
