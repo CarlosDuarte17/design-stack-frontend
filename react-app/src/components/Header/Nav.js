@@ -16,18 +16,51 @@ export default function Nav() {
             <Logo />
             <Flex as="nav">
             <UnorderedList display="flex" fontWeight={500} color="#6e6d7a" fontSize="0.875rem" styleType="none">
-              <ListItem paddingInline="3">
-                <Link textDecorationStyle="none">Inspiration</Link>
+              <ListItem paddingInline="4">
+                <Link 
+                  fontWeight="semibold"
+                  textDecorationStyle="none"
+                  _hover={{ color: 'pink.500', textDecorationLine: 'none' }}
+                >
+                  Inspiration
+                </Link>
               </ListItem>
-              <ListItem paddingInline="3">
-                <Link textDecoration="none">Find Work</Link>
+              <ListItem paddingInline="4">
+                <Link 
+                  fontWeight="semibold"
+                  textDecorationStyle="none"
+                  _hover={{ color: 'pink.500', textDecorationLine: 'none' }}
+                  >
+                    Find Work
+                </Link>
               </ListItem>
-              <ListItem paddingInline="3">
-                <Link textDecoration="none">Learn</Link></ListItem>
-              <ListItem paddingInline="3">
-                <Link textDecoration="none">Go Pro</Link></ListItem>
-              <ListItem paddingInline="3">
-                <Link textDecoration="none">Hire Designers</Link></ListItem>
+              <ListItem paddingInline="4">
+                <Link 
+                  fontWeight="semibold"
+                  textDecorationStyle="none"
+                  _hover={{ color: 'pink.500', textDecorationLine: 'none' }}
+                >
+                  Learn Design
+                </Link>
+              </ListItem>
+              <ListItem paddingInline="4">
+                <Link 
+                  fontWeight="semibold"
+                  textDecorationStyle="none"
+                  _hover={{ color: 'pink.500', textDecorationLine: 'none' }}
+                >
+                  Go Pro
+                </Link>
+              </ListItem>
+              <ListItem paddingInline="4">
+                <Link 
+                  fontWeight="semibold"
+                  textDecorationStyle="none"
+                  _hover={{ color: 'pink.500', textDecorationLine: 'none' }}
+                >
+                  Hire Designers
+                </Link>
+              </ListItem>
             </UnorderedList>
             </Flex>
           </Flex>  
