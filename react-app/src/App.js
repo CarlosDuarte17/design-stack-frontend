@@ -8,33 +8,54 @@ import {
   Code,
   Grid,
   theme,
+  Flex,
+  Container,
+  UnorderedList,
+  ListItem,
+  InputGroup,
+  InputLeftElement,
+  Input,
+  PhoneIcon
 } from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
+import { SearchIcon } from './assets/icons/SearchIcon';
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box>
+      <Flex alignItems="center" as="header" bg="white" h="80px">
+        <Container alignItems="center" display="flex" justifyContent="space-between" mx="24px" maxW="100%" px={0} >
+          <Flex alignItems="center">
+            <Logo />
+            <Flex as="nav">
+            <UnorderedList display="flex" fontWeight={500} color="#6e6d7a" fontSize="0.875rem" styleType="none">
+              <ListItem paddingInline="3">
+                <Link textDecorationStyle="none">Inspiration</Link>
+              </ListItem>
+              <ListItem paddingInline="3">
+                <Link textDecoration="none">Find Work</Link>
+              </ListItem>
+              <ListItem paddingInline="3">
+                <Link textDecoration="none">Learn</Link></ListItem>
+              <ListItem paddingInline="3">
+                <Link textDecoration="none">Go Pro</Link></ListItem>
+              <ListItem paddingInline="3">
+                <Link textDecoration="none">Hire Designers</Link></ListItem>
+            </UnorderedList>
+            </Flex>
+          </Flex>
+          <Flex>
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents="none"
+                children={<SearchIcon />}
+              />
+              <Input maxW={120} type="search" placeholder="Search" />
+            </InputGroup>
+
+          </Flex>
+        </Container>
+      </Flex>
     </ChakraProvider>
   );
 }

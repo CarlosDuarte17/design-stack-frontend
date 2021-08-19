@@ -18,19 +18,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
-
-Route::get('/user', function (Request $request) {
-    return response()->json([
-        'token' => User::findOrFail(1)->createToken('secure_token')->plainTextToken,
-        'message' => 'Success'
-    ]);
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
 });
-//
-//Route::apiResource('users', UserController::class)
-//    ->only(['index', 'show'])
-//    ->middleware('auth:sanctum');
 
-//Route::post('/login', [LoginController::class, 'login']);
+//
+Route::apiResource('users', UserController::class)
+    ->only(['index', 'show'])
+    ->middleware('auth:sanctum');
+
+Route::post('/login', [LoginController::class, 'login']);

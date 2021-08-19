@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from '@chakra-ui/react';
-import logo from './logo.svg';
+import logo from './search.svg';
 
-export function Logo() {
+export function SearchIcon() {
   return <Image src={logo} />;
 };
