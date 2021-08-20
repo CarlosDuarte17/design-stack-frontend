@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -25,6 +26,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //
 Route::apiResource('users', UserController::class)
     ->only(['index', 'show'])
+    ->middleware('auth:sanctum');
+
+Route::apiResource('posts', PostController::class)
+    ->only(['store'])
     ->middleware('auth:sanctum');
 
 Route::post('/login', [LoginController::class, 'login']);
