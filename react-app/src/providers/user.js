@@ -1,4 +1,4 @@
-export async function fetchUser( token = '1|qyRpdlGkVzIsQQ89XCoaYro8ddTc5bnqg2nxvLf7' ) {
+export async function fetchUser( token = '1|UHy9GIFeqXebYUEEmlpM6o9kYs89PTsSeSE5JrLG' ) {
     
     const resp = await fetch(`http://127.0.0.1:8000/api/user`, {
         headers: {
