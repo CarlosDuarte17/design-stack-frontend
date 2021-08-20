@@ -3,7 +3,6 @@ import {useDropzone} from 'react-dropzone';
 import imagePlaceHolder from '../../assets/images/image-placeholder.png';
 import {
     Flex,
-    Link,
     Image,
     Text,
     Heading,
