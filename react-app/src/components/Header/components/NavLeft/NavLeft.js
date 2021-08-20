@@ -7,10 +7,10 @@ import {
 from '@chakra-ui/react';
 import { Link as ReactLink } from 'react-router-dom'
 
-import { Logo } from '../../assets/icons/Logo';
+import { Logo } from '../../../../assets/icons/Logo';
 import { NavLink } from './NavLink'
 
-export default function Nav() {
+export function NavLeft() {
     return (
         <>
           <Flex alignItems="center">
