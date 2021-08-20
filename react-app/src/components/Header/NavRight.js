@@ -12,8 +12,7 @@ import {
   ListItem,
   Button,
   Spinner
-}
-  from '@chakra-ui/react';
+} from '@chakra-ui/react';
 
 import { UserImage } from './UserImage';
 import { WorkIcon } from '../../assets/icons/Icons';

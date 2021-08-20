@@ -4,23 +4,32 @@ import {
   theme,
 } from '@chakra-ui/react';
 
+import {
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query'
+
 import { BrowserRouter as Router } from "react-router-dom";
 
 import { AppContext } from './AppContext';
 import Header from './components/Header/Header';
 import { AppRoutes } from './pages/Route'
 
+const queryClient = new QueryClient();
+
 function App() {
 
   return (
-    <AppContext.Provider value={{obj: 'hola'}} >
-        <Router>
-          <ChakraProvider theme={theme}>
-            <Header />
-            <AppRoutes />
-          </ChakraProvider>
-        </Router>
-    </AppContext.Provider>
+    <QueryClientProvider client={ queryClient }>
+      <AppContext.Provider value={{obj: 'hola'}} >
+          <Router>
+            <ChakraProvider theme={theme}>
+              <Header />
+              <AppRoutes />
+            </ChakraProvider>
+          </Router>
+      </AppContext.Provider>
+    </QueryClientProvider>
   );
 }
 
