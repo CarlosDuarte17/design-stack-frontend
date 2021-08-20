@@ -9,7 +9,6 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Post extends Model
 {
-    use HasApiTokens;
     use HasFactory;
     use SoftDeletes;
 
@@ -23,5 +22,10 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function tags()
+    {
+        return $this->hasMany(Tag::class);
     }
 }
