@@ -1,3 +1,6 @@
+# Description
+This is a test done in order to practice react, react-query and chakra-ui based on dribbble website.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
