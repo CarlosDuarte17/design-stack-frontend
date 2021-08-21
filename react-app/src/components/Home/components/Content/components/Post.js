@@ -1,76 +1,36 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {
-    Box,
-    GridItem,
-    Text,
-    Image,
-    WrapItem,
-    Avatar,
-    Flex,
-    Badge
+    Spinner,
+    GridItem
 } from '@chakra-ui/react';
 
-import { HeartIcon } from '../../../../../assets/icons/Icons'
+import { AppContext } from '../../../../../AppContext';
+import { PostItem } from './PostItem';
 
 export function Post() {
+
+    const { data, isLoading } = useContext(AppContext);
+    
+    if (isLoading) {
+        return (
+            <GridItem display="flex" colSpan={4} justifyContent="center" w="100%">
+                <Spinner 
+                    size="xl" 
+                    emptyColor="gray.200" 
+                    color="pink.500"
+                    thickness="4px"
+                    />
+            </GridItem>
+        )
+    }
+
     return (
-        <GridItem>
-            <Box overflow="hidden">
-                <Image 
-                    borderRadius="8px"
-                    h="206px" 
-                    objectFit="cover"
-                    w="100%"
-                    src="https://cdn.dribbble.com/users/6816261/screenshots/16280090/media/bad4f5034f7a13949240fe072967d37a.png?compress=1&resize=1200x900" />
-            </Box>
-            <Flex 
-                alignItems="center"
-                fontSize="0.875rem"
-                justifyContent="space-between"
-                marginBlockStart="8px">
-                <Flex
-                    alignItems="center"
-                    sx={{ gap: '8px'}}>
-                    <WrapItem>
-                        <Avatar
-                            h="24px"
-                            name="Dan Abrahmov" src="https://bit.ly/dan-abramov"
-                            w="24px" 
-                            />
-                    </WrapItem>
-                    <Text 
-                        as="span"
-                        fontWeight="600">
-                        Ashraf Omran
-                    </Text>
-                    <Badge
-                        fontSize="0.625rem"
-                        bgColor="gray.300"
-                        color="white"
-                        cursor="pointer"
-                        _hover={{ bgColor: 'pink.500' }}>
-                        PRO
-                    </Badge>
-                </Flex>
-                <Flex 
-                    alignItems="center"
-                    fontSize="0.75rem"
-                    sx={{ gap: '6px'}}>
-                    <HeartIcon 
-                        color="gray.400" 
-                        cursor="pointer"
-                        _hover={{ color: 'pink.500' }} />
-                    <Text
-                        as="span">
-                        69
-                    </Text>
-                    <HeartIcon color="gray.400" />
-                    <Text
-                        as="span">
-                        4.8k
-                    </Text>
-                </Flex>
-            </Flex>
-        </GridItem>
+        <>
+        {
+            data.data.map((post) => (
+                <PostItem key={post.post_id} post={post}/>
+            )) 
+        }
+        </>
     );
 }

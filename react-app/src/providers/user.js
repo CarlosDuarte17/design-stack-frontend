@@ -1,4 +1,4 @@
-export async function fetchUser( token = '1|UHy9GIFeqXebYUEEmlpM6o9kYs89PTsSeSE5JrLG' ) {
+export async function fetchUser( token = '2|EfwLCPBetEBzPr8hkpbcEApSrUMGvGCJVOpBiCMf' ) {
     
     const resp = await fetch(`http://127.0.0.1:8000/api/user`, {
         headers: {
@@ -8,7 +8,6 @@ export async function fetchUser( token = '1|UHy9GIFeqXebYUEEmlpM6o9kYs89PTsSeSE5
     })
 
     const data = await resp.json();
-
     return data;
     // return await ky(`http://127.0.0.1:8000/api/user`).json();
 }    

@@ -25,7 +25,11 @@ function ModalSubmit({ onClose, isOpen, data, image }) {
   const inputTagRef = useRef();
   const navigate = useNavigate();
 
-  const { isLoading, isSuccess, mutate } = useMutation(fetchPost);
+  const { isLoading, isSuccess, mutate } = useMutation(fetchPost, {
+    onSuccess: () => {
+      navigate('/');
+    }
+  });
 
   const handleUploadData = useCallback(
     e => {
@@ -53,9 +57,8 @@ function ModalSubmit({ onClose, isOpen, data, image }) {
     [data, image, mutate]
   );
 
-  if (isSuccess) {
-    navigate('/');
-  }
+  // if (isSuccess) {
+  // }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -134,7 +137,7 @@ export function Options({ isSelectedImage, image, formData: data }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box p="24px">
+    <Box pos="sticky" insetBlockStart={0} p="24px">
       <Flex justify="space-between">
         <Box>
           <Button as={ReactLink} fontWeight="normal" variant="outline" to="/">
