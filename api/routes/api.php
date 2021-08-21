@@ -28,6 +28,8 @@ Route::apiResource('users', UserController::class)
     ->only(['index', 'show'])
     ->middleware('auth:sanctum');
 
+Route::get('posts', [PostController::class, 'index']);
+
 Route::apiResource('posts', PostController::class)
     ->only(['store'])
     ->middleware('auth:sanctum');

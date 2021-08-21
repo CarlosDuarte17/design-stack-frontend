@@ -3,11 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PostCollection;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function index(Request $request)
+    {
+        return new PostCollection(Post::all());
+    }
+
     public function store(Request $request)
     {
 //        return response()->json([

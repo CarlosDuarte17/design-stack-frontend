@@ -28,4 +28,9 @@ class Post extends Model
     {
         return $this->hasMany(Tag::class);
     }
+
+    public function getimageFullPathAttribute(): string
+    {
+        return '/storage/'.$this->image;
+    }
 }
