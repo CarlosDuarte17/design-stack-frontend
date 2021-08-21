@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         return new PostCollection(Post::all());
     }
