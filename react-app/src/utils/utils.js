@@ -1,4 +1,4 @@
-import { fetchUser } from '../providers/user';
+import { getUser } from '../providers/user';
 
 export function createResource(promise) {
   let status = 'pending';
@@ -24,7 +24,7 @@ export function createResource(promise) {
 }
 
 export function fetchData() {
-  const userPromise = fetchUser();
+  const userPromise = getUser();
 
   return userPromise;
 }

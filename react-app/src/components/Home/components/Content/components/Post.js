@@ -28,7 +28,7 @@ export function Post() {
         <>
         {
             data.data.map((post) => (
-                <PostItem key={post.post_id} post={post}/>
+                <PostItem key={post.id} post={post}/>
             )) 
         }
         </>

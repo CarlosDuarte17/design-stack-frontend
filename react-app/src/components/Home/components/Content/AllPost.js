@@ -12,7 +12,6 @@ export function AllPost() {
         <>
             <Header />
             <Grid
-                h="200px"
                 marginBlockStart="36px"
                 grid-auto-rows="max-content"
                 templateColumns="repeat(auto-fill, minmax(274px, 1fr))"

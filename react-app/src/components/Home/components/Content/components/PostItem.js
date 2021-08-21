@@ -37,7 +37,8 @@ export function PostItem({ post }) {
                         <WrapItem>
                             <Avatar
                                 h="24px"
-                                name="Dan Abrahmov" src="https://bit.ly/dan-abramov"
+                                name={post.user.name[0]} 
+                                // src="https://bit.ly/dan-abramov"
                                 w="24px" 
                                 />
                         </WrapItem>

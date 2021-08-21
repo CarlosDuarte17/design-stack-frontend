@@ -3,8 +3,6 @@ import {
     Flex, 
     Button, 
     Box,
-    TabPanels,
-    TabPanel,
     useDisclosure,
     Tabs
 } from '@chakra-ui/react'
@@ -35,7 +33,7 @@ export function ToolBar() {
                     variant="outline" 
                     leftIcon={<HamburgerIcon />}
                     onClick={onToggle}
-                    >Click Me
+                    >Filters
                 </Button>
             </Flex>
             <Box>

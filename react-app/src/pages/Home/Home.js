@@ -7,14 +7,12 @@ import { AppContext } from '../../AppContext';
 
 
 export function Home() {
-    const { isLoading, isSuccess, data } = useQuery('posts', getPosts);
+    const { isLoading, isSuccess, data } = useQuery('posts2', getPosts);
     return (
-
         <>
-        <AppContext.Provider value={{ isLoading, isSuccess, data }} >
-            <HomeContent />
-        </AppContext.Provider>
-
+            <AppContext.Provider value={{ isLoading, isSuccess, data }} >
+                <HomeContent />
+            </AppContext.Provider>
         </>
     )
 }
