@@ -9,11 +9,11 @@ import {
 import { HamburgerIcon } from '@chakra-ui/icons'
 
 import { MenuLeft } from './components/MenuLeft'
-import { SectionTabList } from './components/Tab'
+import { SectionTabList } from './components/SectionTabList'
 import { Filter } from './components/Filter'
-import { SectionTabPanels } from './components/Tab/SectionTabPanels'
+import { SectionTabPanel } from './components/SectionTabPanel'
 
-export function ToolBar() {
+export function Content() {
     const { isOpen, onToggle } = useDisclosure()
 
     return (
@@ -40,7 +40,7 @@ export function ToolBar() {
                 <Filter isOpen={isOpen} />
             </Box>
             <Box>
-                <SectionTabPanels />
+                <SectionTabPanel />
             </Box>
         </Tabs>
     )

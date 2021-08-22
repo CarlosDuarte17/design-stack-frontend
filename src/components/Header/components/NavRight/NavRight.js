@@ -14,7 +14,7 @@ import {
   Spinner
 } from '@chakra-ui/react';
 
-import { UserImage } from './UserImage';
+import { UserImage } from './components';
 import { WorkIcon } from '../../../../assets/icons/Icons';
 
 export function NavRight() {

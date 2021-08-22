@@ -1,7 +1,6 @@
 import React from 'react'
 import { Flex, Container} from '@chakra-ui/react';
-import { NavRight } from './components/NavRight/NavRight';
-import { NavLeft } from './components/NavLeft/NavLeft';
+import { NavRight, NavLeft } from './components';
 
 
 export default function Header() {

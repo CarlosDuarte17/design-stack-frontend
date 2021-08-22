@@ -1,12 +1,12 @@
 import React from 'react'
 import { TabPanels, TabPanel } from '@chakra-ui/react'
-import { AllPost } from '../../../Content/AllPost'
+import { Post } from './components'
 
-export function SectionTabPanels() {
+export function SectionTabPanel() {
     return (
         <TabPanels>
             <TabPanel p={0}>
-                <AllPost />
+                <Post />
             </TabPanel>
             <TabPanel>
                 we are building... nothing to show right now

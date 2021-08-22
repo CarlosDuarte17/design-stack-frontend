@@ -1,7 +1,7 @@
 import React from 'react'
 import { Avatar } from '@chakra-ui/react';
-import { useQuery } from 'react-query'
-import { getUser } from '../../../../providers/user'
+import { useQuery } from 'react-query';
+import { getUser } from '../../../../../../providers/user';
 // import { fetchData } from '../../../../utils/utils'
 
 // const resource = fetchData();

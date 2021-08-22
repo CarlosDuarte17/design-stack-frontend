@@ -1,5 +1,5 @@
-import React from 'react'
-import { ListItem, Link } from '@chakra-ui/react'
+import React from 'react';
+import { ListItem, Link } from '@chakra-ui/react';
 
 export function NavLink({ children }) {
     return (

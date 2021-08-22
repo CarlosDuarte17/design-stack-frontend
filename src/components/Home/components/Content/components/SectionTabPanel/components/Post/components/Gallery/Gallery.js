@@ -1,17 +1,16 @@
 import React, { useContext } from 'react'
 import {
     Spinner,
-    GridItem,
     Text,
     Button,
     Grid,
     Flex
 } from '@chakra-ui/react';
 
-import { AppContext } from '../../../../../AppContext';
-import { PostItem } from './PostItem';
+import { AppContext } from '../../../../../../../../../../AppContext';
+import { PostItem } from './components/PostItem/PostItem';
 
-export function Post() {
+export function Gallery() {
 
     const { data, isLoading, isPreviousData, setPage, page, isFetching } = useContext(AppContext);
     

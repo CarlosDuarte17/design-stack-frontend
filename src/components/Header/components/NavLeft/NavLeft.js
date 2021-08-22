@@ -8,7 +8,7 @@ from '@chakra-ui/react';
 import { Link as ReactLink } from 'react-router-dom'
 
 import { Logo } from '../../../../assets/icons/Logo';
-import { NavLink } from './NavLink'
+import { NavLink } from './components';
 
 export function NavLeft() {
     return (

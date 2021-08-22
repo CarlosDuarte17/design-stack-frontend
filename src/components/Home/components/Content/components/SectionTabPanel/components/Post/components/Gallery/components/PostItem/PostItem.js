@@ -10,7 +10,7 @@ import {
     Badge,
 } from '@chakra-ui/react';
 
-import { HeartIcon } from '../../../../../assets/icons/Icons';
+import { HeartIcon } from '../../../../../../../../../../../../assets/icons/Icons';
 
 export function PostItem({ post }) {
     return (
