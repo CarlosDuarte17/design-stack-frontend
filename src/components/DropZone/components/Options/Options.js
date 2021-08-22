@@ -25,7 +25,7 @@ function ModalSubmit({ onClose, isOpen, data, image }) {
   const inputTagRef = useRef();
   const navigate = useNavigate();
 
-  const { isLoading, isSuccess, mutate } = useMutation(fetchPost, {
+  const { isLoading, mutate } = useMutation(fetchPost, {
     onSuccess: () => {
       navigate('/');
     }
@@ -44,21 +44,10 @@ function ModalSubmit({ onClose, isOpen, data, image }) {
       formData.append('tags', inputTagRef.current.value);
 
       mutate(formData);
-      //   fetchPost(formData)
-      //     .then(() => navigate('/'))
-      //     .catch(console.log);
-
-      // if(fetchPost(formData)) {
-      //     navigate('/');
-      // }
-
       return 'error';
     },
     [data, image, mutate]
   );
-
-  // if (isSuccess) {
-  // }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -71,7 +60,7 @@ function ModalSubmit({ onClose, isOpen, data, image }) {
         <ModalBody px={0} py={6}>
           <Text>
             <Text as="span" fontWeight="bold">
-              Tags{' '}
+              Tags&bnsp;
             </Text>
             (maximun 10)
           </Text>

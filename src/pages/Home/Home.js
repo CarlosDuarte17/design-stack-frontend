@@ -4,13 +4,26 @@ import { useQuery } from 'react-query';
 
 import { getPosts } from '../../providers/post';
 import { AppContext } from '../../AppContext';
+import { useState } from 'react';
 
 
 export function Home() {
-    const { isLoading, isSuccess, data } = useQuery('posts2', getPosts);
+    const [page, setPage] = useState(1);
+
+    const { 
+        isLoading,
+        // isError,
+        // error,
+        data,
+        isFetching,
+        isPreviousData, 
+    } = useQuery(['posts', page], () => getPosts(page), {
+        keepPreviousData: true
+    });
+
     return (
         <>
-            <AppContext.Provider value={{ isLoading, isSuccess, data }} >
+            <AppContext.Provider value={{ isLoading, isPreviousData, isFetching, page, data, setPage}} >
                 <HomeContent />
             </AppContext.Provider>
         </>

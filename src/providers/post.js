@@ -16,9 +16,9 @@ export async function fetchPost( formData) {
     // return await ky(`http://127.0.0.1:8000/api/user`).json();
 }
 
-export async function getPosts() {
+export async function getPosts( page ) {
     
-    const resp = await fetch(`http://127.0.0.1:8000/api/posts`, {
+    const resp = await fetch(`http://127.0.0.1:8000/api/posts?page=${ page }`, {
         headers: {
             Accept: `application/json`,
             Authorization: `Bearer ${ token }`
@@ -26,6 +26,20 @@ export async function getPosts() {
     })
 
     const data = await resp.json();
-
+    console.log(data);
     return data;
 }  
+
+// export async function getPosts() {
+    
+//     const resp = await fetch(`http://127.0.0.1:8000/api/posts`, {
+//         headers: {
+//             Accept: `application/json`,
+//             Authorization: `Bearer ${ token }`
+//         }
+//     })
+
+//     const data = await resp.json();
+
+//     return data;
+// } 

@@ -5,7 +5,6 @@ import {
     MenuList,
     MenuItem,
     Button,
-    Link
 } from '@chakra-ui/react'
 
 import { ChevronDownIcon } from '@chakra-ui/icons'
