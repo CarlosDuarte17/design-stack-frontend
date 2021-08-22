@@ -8,10 +8,12 @@ import {
 } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 
-import { MenuLeft } from './components/MenuLeft'
-import { SectionTabList } from './components/SectionTabList'
-import { Filter } from './components/Filter'
-import { SectionTabPanel } from './components/SectionTabPanel'
+import { 
+    MenuLeft, 
+    SectionTabList, 
+    SectionTabPanel ,
+    Filter
+} from './components';
 
 export function Content() {
     const { isOpen, onToggle } = useDisclosure()
@@ -21,7 +23,7 @@ export function Content() {
             variant="soft-rounded" 
             colorScheme="gray"
             >
-            <Flex justifyContent="space-between">
+            <Flex wrap="wrap" justifyContent="space-between">
                 <MenuLeft />
                 <SectionTabList isOpen={isOpen} />
                 <Button 

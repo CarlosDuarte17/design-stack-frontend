@@ -1,3 +1,9 @@
-html {
+/* html {
     font-family: Helvetica, Arial, sans-serif;
+} */
+
+@media screen and (min-width: 1560px) {
+    html {
+        font-size: 20px;
+    }
 }

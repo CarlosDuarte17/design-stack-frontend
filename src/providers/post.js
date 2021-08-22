@@ -26,7 +26,6 @@ export async function getPosts( page ) {
     })
 
     const data = await resp.json();
-    console.log(data);
     return data;
 }  
 

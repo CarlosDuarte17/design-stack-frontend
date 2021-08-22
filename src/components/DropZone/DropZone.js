@@ -1,23 +1,22 @@
-import React from 'react'
-import { Options } from './components/Options/Options'
-import { Upload } from './components/Upload/Upload'
-import { Box, Heading, Text } from '@chakra-ui/react'
-import { useState } from 'react'
-import { Form as PostForm } from './components/Form'
+import React, { useState } from 'react';
+
+import { Options, Upload, Form as PostForm } from './components';
+import { Box, Heading, Text } from '@chakra-ui/react';
 
 export function DropZone() {
+    
     const [isSelectedImage, setIsSelectedImage] = useState(false);
     const [formData, setFormData] = useState({
         title: '',
         description: '',
         tags: ''
     });
+
     const [image, setImage] = useState({
         imageFile: null,
         imageUrl: null,
     });
-    // const [isWriting, setIsWriting] = useState(false);
-
+    
     return (
         <div>
             <Options isSelectedImage={isSelectedImage} image={image} formData={formData} />
