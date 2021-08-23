@@ -21,7 +21,7 @@ export function Gallery() {
         current_page: 0
     });
 
-    const { data, isLoading, isFetching } = useQuery(['posts', page], () => getPosts(page), {
+    const { data, isRefetchError, isLoading, isFetching } = useQuery(['posts', page], () => getPosts(page), {
         // refetchOnWindowFocus: false,
         keepPreviousData: true,
         onSuccess: (data) => {
@@ -38,7 +38,7 @@ export function Gallery() {
         }
     });
 
-    if (data && data.message) {
+    if (isRefetchError || (data && data.message)) {
         return (
             <Alert marginBlockStart="20px" status="error">
                 <AlertIcon />

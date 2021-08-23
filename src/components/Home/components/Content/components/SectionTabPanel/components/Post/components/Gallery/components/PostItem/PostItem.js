@@ -45,7 +45,9 @@ export function PostItem({ post }) {
                         </WrapItem>
                         <Text 
                             as="span"
-                            fontWeight="600">
+                            fontWeight="600"
+                            overflow="hidden"
+                            sx={{ display: '-webkit-box', 'WebkitLineClamp': '1', 'WebkitBoxOrient': 'vertical'}}>
                             {post.user.name}
                         </Text>
                         <Badge

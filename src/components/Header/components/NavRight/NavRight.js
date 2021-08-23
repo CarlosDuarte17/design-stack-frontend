@@ -47,7 +47,7 @@ export function NavRight() {
             <WorkIcon color="gray.400" cursor="pointer" h="20px" w="20px" />
           </ListItem>
           <ListItem marginInline="10px">
-          <ErrorBoundary fallbackRender={<Avatar bgColor="blue.500" h="32px" name="A" src="https://bit.ly/tioluwani-kolawole" width="32px" /> }>
+          <ErrorBoundary fallback={<Avatar bgColor="blue.500" h="32px" name="A" src="https://bit.ly/tioluwani-kolawole" width="32px" /> }>
               <Suspense fallback={ <Spinner /> }>
                 <UserImage />
               </Suspense>

@@ -1,22 +1,8 @@
 import React from 'react'
-import { 
-    Tab,
+import {
     TabList, 
 } from '@chakra-ui/react';
-
-function TabItem({ children }) {
-    return (
-        <Tab 
-            borderRadius="8px" 
-            fontSize="0.875rem"
-            fontWeight="normal"
-            paddingInline="12px" 
-            paddingBlock="10px"
-            _focus={{ outline: 'none !important', border: 'none' }} >
-            { children }
-        </Tab>
-    );
-}
+import { TabItem } from './components';
 
 export function SectionTabList() {
     return (
