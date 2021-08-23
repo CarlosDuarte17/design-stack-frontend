@@ -1,7 +1,6 @@
-import * as React from 'react';
-import { SearchIcon } from '@chakra-ui/icons'
 import { Suspense } from 'react';
 import { Link as ReactLink } from 'react-router-dom';
+import { SearchIcon } from '@chakra-ui/icons'
 
 import {
   Flex,
