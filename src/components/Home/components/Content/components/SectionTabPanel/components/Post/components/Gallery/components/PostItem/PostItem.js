@@ -25,8 +25,7 @@ export function PostItem({ post }) {
                         objectFit="cover"
                         w="100%"
                         data-src={post.image}
-                        src={post.image}/>
-                        {/* https://cdn.dribbble.com/users/6816261/screenshots/16280090/media/bad4f5034f7a13949240fe072967d37a.png?compress=1&resize=1200x900 */}
+                        src={post.image}/>                        
                 </Box>
                 <Flex 
                     alignItems="center"
