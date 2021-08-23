@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Link as ReactLink } from 'react-router-dom';
-import { SearchIcon } from '@chakra-ui/icons'
 
+import { SearchIcon } from '@chakra-ui/icons'
 import {
   Flex,
   InputGroup,
@@ -10,11 +10,13 @@ import {
   UnorderedList,
   ListItem,
   Button,
-  Spinner
+  Spinner,
+  Avatar
 } from '@chakra-ui/react';
 
 import { UserImage } from './components';
 import { WorkIcon } from '../../../../assets/icons/Icons';
+import { ErrorBoundary } from 'react-error-boundary';
 
 export function NavRight() {
   return (
@@ -35,7 +37,7 @@ export function NavRight() {
                 borderRadius={8}
                 fontSize="0.875rem"
                 maxW={124} type="search"
-                paddingStart="32px"
+                paddingStart={{ base: '32px', '2xl': '40px'}}
                 placeholder="Search"
                 _focus={{ backgroundColor: 'white', boxShadow: '0 0 0 4px rgb(234 76 137 / 10%)', borderColor: 'rgba(234,76,137,0.4)' }}
                 _hover={{ backgroundColor: 'white', boxShadow: '0 0 0 4px rgb(234 76 137 / 10%)' }} />
@@ -45,9 +47,11 @@ export function NavRight() {
             <WorkIcon color="gray.400" cursor="pointer" h="20px" w="20px" />
           </ListItem>
           <ListItem marginInline="10px">
+          <ErrorBoundary fallbackRender={<Avatar bgColor="blue.500" h="32px" name="A" src="https://bit.ly/tioluwani-kolawole" width="32px" /> }>
               <Suspense fallback={ <Spinner /> }>
                 <UserImage />
               </Suspense>
+          </ErrorBoundary>
           </ListItem>
           <ListItem marginInlineStart="10px">
             <Button cursor="pointer" as={ReactLink} colorScheme="pink" fontSize="0.875rem" to="/uploads/new">Upload</Button>

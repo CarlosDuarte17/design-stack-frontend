@@ -1,10 +1,8 @@
 import React, { useCallback } from 'react'
 import { Textarea, Image, Box } from '@chakra-ui/react'
 
-export function Form({ image, setFormData }) {
-    // const {title, description} = setFormData;
-    // const inputTitleRef = useRef(null)
-
+export function Form({ image, setFormData, inputTitleRef }) {
+    
     const handleWritingInput = useCallback((e) => {
         setFormData((prev) => ({...prev, title: e.target.value}));
     }, [setFormData]);
@@ -33,6 +31,7 @@ export function Form({ image, setFormData }) {
                 // value={title}
                 // ref={inputTitleRef}
                 onChange={handleWritingInput}
+                ref={inputTitleRef}
                 />
             <Box h={576}>
                 <Image 

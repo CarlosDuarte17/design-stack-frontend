@@ -13,7 +13,11 @@ import { NavLink } from './components';
 export function NavLeft() {
     return (
         <>
-          <Flex alignItems="center">
+          <Flex 
+            alignItems="center"
+            wrap="wrap"
+            justifyContent={{ base: 'center', lg: 'flex-start'}}
+            marginBlockEnd={{ base: '20px', lg: '0'}}>
             <Link as={ReactLink} cursor="pointer" outline="none" to="/">
               <Logo />
             </Link>

@@ -26,13 +26,7 @@ export function createResource(promise) {
 export function fetchData() {
   const userPromise = getUser();
 
-  return userPromise;
+  return {
+    user: createResource(userPromise),
+  };
 }
-
-// export function fetchData() {
-//   const userPromise = fetchUser();
-
-//   return {
-//     user: createResource(userPromise),
-//   };
-// }

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import {
     Collapse,
     Flex,
@@ -22,7 +23,7 @@ import {
   UnplashIcon
 } from './assets/Icons';
 
-export function Filter({ isOpen }) {
+export const Filter = memo(function Filter({ isOpen }) {
   
     return (
         <Collapse in={isOpen} animateOpacity>
@@ -90,4 +91,4 @@ export function Filter({ isOpen }) {
           </Flex>
         </Collapse>
     )
-  }
+  })

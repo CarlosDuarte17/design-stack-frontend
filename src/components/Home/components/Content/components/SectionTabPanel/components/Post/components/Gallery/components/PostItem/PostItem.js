@@ -8,8 +8,10 @@ import {
     Avatar,
     Flex,
     Badge,
+    Icon,
 } from '@chakra-ui/react';
 
+import { AiFillEye } from 'react-icons/ai';
 import { HeartIcon } from '../../../../../../../../../../../../assets/icons/Icons';
 
 export function PostItem({ post }) {
@@ -22,8 +24,8 @@ export function PostItem({ post }) {
                         h="206px" 
                         objectFit="cover"
                         w="100%"
-                        data-src={post.imageFullPath}
-                        src={`http://localhost:8000${ post.imageFullPath }`} />
+                        data-src={post.image}
+                        src={post.image}/>
                         {/* https://cdn.dribbble.com/users/6816261/screenshots/16280090/media/bad4f5034f7a13949240fe072967d37a.png?compress=1&resize=1200x900 */}
                 </Box>
                 <Flex 
@@ -37,8 +39,7 @@ export function PostItem({ post }) {
                         <WrapItem>
                             <Avatar
                                 h="24px"
-                                name={post.user.name[0]} 
-                                // src="https://bit.ly/dan-abramov"
+                                name={post.user.name[0]}
                                 w="24px" 
                                 />
                         </WrapItem>
@@ -68,7 +69,7 @@ export function PostItem({ post }) {
                             as="span">
                             69
                         </Text>
-                        <HeartIcon color="gray.400" />
+                        <Icon as={AiFillEye} color="gray.400" h="16px" w="16px" />
                         <Text
                             as="span">
                             4.8k

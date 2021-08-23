@@ -21,7 +21,7 @@ function TabItem({ children }) {
 export function SectionTabList() {
     return (
         <>
-        <TabList>
+        <TabList marginBlock={{ base: '20px', lg: '0' }} overflowX={{ base: 'scroll', md: 'auto'}}>
             <TabItem>
                 All
             </TabItem>

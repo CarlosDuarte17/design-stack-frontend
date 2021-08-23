@@ -20,6 +20,7 @@ export function Button({ children }) {
             w="100%"
             rightIcon={<ChevronDownIcon />}
             _focus={{ backgroundColor: 'white', boxShadow: '0 0 0 4px rgb(234 76 137 / 10%)', borderColor: 'rgba(234,76,137,0.4)' }}
+            _active={{ backgroundColor: 'white', boxShadow: '0 0 0 4px rgb(234 76 137 / 10%)', borderColor: 'rgba(234,76,137,0.4)' }}
             >
             { children }
         </MenuButton>

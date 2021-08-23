@@ -11,5 +11,4 @@ export async function getUser() {
 
     const data = await resp.json();
     return data;
-    // return await ky(`http://127.0.0.1:8000/api/user`).json();
 }    

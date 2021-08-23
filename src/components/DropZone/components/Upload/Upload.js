@@ -48,7 +48,7 @@ export function Upload({ setImage, setIsSelectedImage }) {
                 borderRadius="10px" 
                 { ...getRootProps({ style }) } 
                 maxW="768px" mx="auto" 
-                marginBlockStart="32px"
+                marginBlock="32px"
                 _hover={{ borderColor: 'blue !important' }}>
             <input {...getInputProps()}onChange={ handleLoadImage } />
                 <Image src={imagePlaceHolder} marginBlockStart="80px" height="86px" width="80px" />

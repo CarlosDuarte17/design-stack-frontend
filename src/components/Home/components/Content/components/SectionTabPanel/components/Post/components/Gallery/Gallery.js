@@ -1,20 +1,20 @@
-import React, { useContext } from 'react'
+import React, { useState } from 'react';
+import { useQuery } from 'react-query';
 import {
     Spinner,
     Button,
     Grid,
     Flex,
     Alert,
-    AlertIcon
+    AlertIcon,
+    Badge
 } from '@chakra-ui/react';
 
-import { AppContext } from '../../../../../../../../../../AppContext';
 import { PostItem } from './components/PostItem/PostItem';
-import { useState } from 'react';
-import { useQuery } from 'react-query';
-import { getPosts } from '../../../../../../../../../../providers/post';
+import { getPosts } from '../../../../../../../../../../providers/API';
 
 export function Gallery() {
+
     const [page, setPage] = useState(1);
     const [state, setState] = useState({
         posts: [],
@@ -22,21 +22,38 @@ export function Gallery() {
     });
 
     const { data, isLoading, isFetching } = useQuery(['posts', page], () => getPosts(page), {
-        refetchOnWindowFocus: false,
+        // refetchOnWindowFocus: false,
         keepPreviousData: true,
         onSuccess: (data) => {
+            if (data.message) {
+                return;
+            }
             // prevent array from repeating data
             if (state.page !== page) {
                 setState((prev) => ({page, posts: [...prev.posts, ...data.data]}));    
             }
+        },
+        onerror: (error) =>{
+            console.log(error)
         }
     });
+
+    if (data && data.message) {
+        return (
+            <Alert marginBlockStart="20px" status="error">
+                <AlertIcon />
+                The server respond message: 
+                { data.message }
+            </Alert>
+        )
+    }
+
     
     if (data?.data.length === 0) {
         return (
             <Alert marginBlockStart="20px" status="info">
                 <AlertIcon />
-                No post actually!
+                there are currently no posts
             </Alert>
         )
     }
@@ -50,9 +67,9 @@ export function Gallery() {
             gap="36px"
             >
             {
-                state.posts.map((post) => (
-            <PostItem key={post.id} post={post}/>
-        ))
+            state.posts.map((post) => (
+                <PostItem key={post.id} post={post}/>
+            ))
             }
         </Grid>
         {
@@ -67,19 +84,36 @@ export function Gallery() {
             </Flex>
         }
         {
-        <Flex justifyContent="flex-end">
-            <Button size="sm" colorScheme="pink"
-                onClick={() => {
-                if (data?.meta.to < data?.meta.total) {
-                    setPage(old => old + 1)
-                }
-                }}
-                // Disable the Next Page button until we know a next page is available
-                disabled={data?.meta.to === data?.meta.total}
-                >
-                Load More
-            </Button>
-        </Flex>
+        data?.meta.to !== data?.meta.total ?
+            (
+                <Flex
+                justifyContent="flex-end"
+                marginBlockStart="20px">
+                <Button size="sm" colorScheme="pink"
+                    onClick={() => {
+                    if (data?.meta.to < data?.meta.total) {
+                        setPage(old => old + 1)
+                    }
+                    }}
+                    // prevent disable the Load More button until we know a next posts is available
+                    disabled={data?.meta.to === data?.meta.total}
+                    >
+                    Load More
+                </Button>
+                </Flex>
+            ) :
+            (
+                <Flex justifyContent="flex-end">
+                    <Badge 
+                        marginBlockStart="20px"
+                        colorScheme="whatsapp"
+                        fontSize="0.875rem"
+                        p={2}
+                        size="xl"
+                        > Total posts: {data?.meta.total}
+                        </Badge>
+                </Flex>
+            )
         }
         </>
     )

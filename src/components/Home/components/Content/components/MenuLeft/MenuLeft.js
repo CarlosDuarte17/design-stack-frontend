@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import {
     Menu,
     MenuButton,
@@ -23,7 +23,7 @@ function MenuToolBarItem ({ color = "gray.600", children }) {
     );
 }
 
-export function MenuLeft() {
+export const MenuLeft = memo(function MenuLeft() {
     return (
         <Menu>
             <MenuButton 
@@ -53,4 +53,4 @@ export function MenuLeft() {
             </MenuList>
         </Menu>
     )
-}
+})

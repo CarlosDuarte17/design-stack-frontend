@@ -1,16 +1,36 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link as ReactLink } from 'react-router-dom';
 import {
   Flex,
   Box,
   Button,
   useDisclosure,
+  useToast
 } from '@chakra-ui/react';
 
 import { TagModal } from './components';
+import { useCallback } from 'react';
 
-export function Options({ isSelectedImage, image, formData: data }) {
+export function Options({ isSelectedImage, image, formData: data, inputTitleRef }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
+  const toastIdRef = useRef();
+
+  const handleShowModal = useCallback(() => {
+      if (inputTitleRef.current.value.trim() === '') {
+        
+          toastIdRef.current = toast({
+            title: `please write a title`,
+            status: 'info',
+            position: 'top-right',
+            isClosable: true,
+          })
+        
+        return;
+      }
+      onOpen();
+    },
+    [inputTitleRef, onOpen, toastIdRef, toast])
 
   return (
     <Box pos="sticky" insetBlockStart={0} p="24px">
@@ -34,7 +54,7 @@ export function Options({ isSelectedImage, image, formData: data }) {
             disabled={!isSelectedImage}
             colorScheme="pink"
             variant="solid"
-            onClick={onOpen}
+            onClick={handleShowModal}
           >
             Continue
           </Button>

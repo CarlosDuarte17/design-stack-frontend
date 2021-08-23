@@ -19,7 +19,7 @@ import {
     Spinner,
 } from '@chakra-ui/react';
 
-import { fetchPost } from '../../../../../../providers/post';
+import { fetchPost } from '../../../../../../providers/API';
 
 export function TagModal({ onClose, isOpen, data, image }) {
     const inputTagRef = useRef();

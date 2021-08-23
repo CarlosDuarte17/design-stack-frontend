@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import { Options, Upload, Form as PostForm } from './components';
 import { Box, Heading, Text } from '@chakra-ui/react';
@@ -11,6 +11,7 @@ export function DropZone() {
         description: '',
         tags: ''
     });
+    const inputTitleRef = useRef();
 
     const [image, setImage] = useState({
         imageFile: null,
@@ -19,7 +20,7 @@ export function DropZone() {
     
     return (
         <div>
-            <Options isSelectedImage={isSelectedImage} image={image} formData={formData} />
+            <Options inputTitleRef={inputTitleRef} isSelectedImage={isSelectedImage} image={image} formData={formData} />
             <Box maxW="1024px" textAlign="center" mx="auto">
                 { !isSelectedImage && 
                     <>
@@ -29,7 +30,7 @@ export function DropZone() {
                 }
                 { 
                     isSelectedImage ? 
-                    <PostForm image={image} setFormData={setFormData} /> :
+                    <PostForm inputTitleRef={inputTitleRef} image={image} setFormData={setFormData} /> :
                     <Upload setImage={setImage} setIsSelectedImage={setIsSelectedImage} />                    
                 }
             </Box>
