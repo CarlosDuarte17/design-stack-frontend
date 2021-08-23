@@ -1,5 +1,5 @@
 // set the authentication token with personal access token
-const token = '10|QiSFXoVB9jGVgZkW42JnIztQAooKONDGfP7uZ92E';
+const token = '10|XEU3S0kZ6titj4kuW1pMCTdLHoI9NoPe4TiR1dLa';
 
 export async function fetchPost( formData) {
 
