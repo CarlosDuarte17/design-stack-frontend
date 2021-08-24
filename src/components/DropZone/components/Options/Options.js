@@ -1,25 +1,24 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Link as ReactLink } from 'react-router-dom';
 import {
   Flex,
   Box,
   Button,
   useDisclosure,
-  useToast
 } from '@chakra-ui/react';
 
 import { TagModal } from './components';
 import { useCallback } from 'react';
+import { useCustomToast } from '../../../../hooks/useCustomToast';
 
-export function Options({ isSelectedImage, image, formData: data, inputTitleRef }) {
+export function Options({ isSelectedImage, files, formData: data, inputTitleRef, inputDescriptionRef }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const toast = useToast();
-  const toastIdRef = useRef();
+  const { showToast } = useCustomToast();
 
   const handleShowModal = useCallback(() => {
       if (inputTitleRef.current.value.trim() === '') {
         
-          toastIdRef.current = toast({
+          showToast({
             title: `please write a title`,
             status: 'info',
             position: 'top-right',
@@ -30,7 +29,7 @@ export function Options({ isSelectedImage, image, formData: data, inputTitleRef 
       }
       onOpen();
     },
-    [inputTitleRef, onOpen, toastIdRef, toast])
+    [inputTitleRef, showToast, onOpen])
 
   return (
     <Box pos="sticky" insetBlockStart={0} p="24px">
@@ -62,7 +61,9 @@ export function Options({ isSelectedImage, image, formData: data, inputTitleRef 
             isOpen={isOpen}
             onClose={onClose}
             data={data}
-            image={image}
+            files={files}
+            inputTitleRef={inputTitleRef}
+            inputDescriptionRef={inputDescriptionRef}
           />
         </Flex>
       </Flex>

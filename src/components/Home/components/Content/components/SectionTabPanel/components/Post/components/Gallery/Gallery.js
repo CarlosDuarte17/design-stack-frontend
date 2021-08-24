@@ -87,16 +87,16 @@ export function Gallery() {
         data?.meta.to !== data?.meta.total ?
             (
                 <Flex
-                justifyContent="flex-end"
+                justifyContent="center"
                 marginBlockStart="20px">
                 <Button size="sm" colorScheme="pink"
                     onClick={() => {
-                    if (data?.meta.to < data?.meta.total) {
+                    if (data?.links.next) {
                         setPage(old => old + 1)
                     }
                     }}
                     // prevent disable the Load More button until we know a next posts is available
-                    disabled={data?.meta.to === data?.meta.total}
+                    disabled={!(data?.links.next)}
                     >
                     Load More
                 </Button>

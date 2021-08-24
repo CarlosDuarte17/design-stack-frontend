@@ -21,7 +21,7 @@ import {
 
 import { fetchPost } from '../../../../../../providers/API';
 
-export function TagModal({ onClose, isOpen, data, image }) {
+export function TagModal({ onClose, isOpen, files, inputTitleRef, inputDescriptionRef }) {
     const inputTagRef = useRef();
     const navigate = useNavigate();
   
@@ -38,15 +38,21 @@ export function TagModal({ onClose, isOpen, data, image }) {
         }
   
         let formData = new FormData();
-        formData.append('title', data.title);
-        formData.append('description', data.description);
-        formData.append('file', image.imageFile, 'image');
+        formData.append('title', inputTitleRef.current.value);
+        formData.append('description', inputDescriptionRef.current.value);
+        console.log(files.files);
+
+        for (const file of files.files) {
+          formData.append(`files[]`, file);
+        }
         formData.append('tags', inputTagRef.current.value);
-  
+        for (var pair of formData.entries()) {
+          console.log(pair[0] + ', ' + pair[1]);
+        }
         mutate(formData);
         return 'error';
       },
-      [data, image, mutate]
+      [files, mutate, inputTitleRef, inputDescriptionRef]
     );
   
     return (

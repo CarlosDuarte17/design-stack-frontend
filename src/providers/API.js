@@ -1,8 +1,7 @@
 // set the authentication token with personal access token
-const token = '10|XEU3S0kZ6titj4kuW1pMCTdLHoI9NoPe4TiR1dLa';
+const token = '10|kkDnN6mGIIjhGlhCTUYdUcrUdKuQWhOfE3OP7U6v';
 
 export async function fetchPost( formData) {
-
     const resp = await fetch(`http://127.0.0.1:8000/api/posts`, {
         headers: {
             Authorization: `Bearer ${ token }`
@@ -12,6 +11,7 @@ export async function fetchPost( formData) {
     })
 
     const data = await resp.json();
+    console.log(data);
 
     return data;
 }

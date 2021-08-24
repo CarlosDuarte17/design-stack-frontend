@@ -6,21 +6,22 @@ import { Box, Heading, Text } from '@chakra-ui/react';
 export function DropZone() {
     
     const [isSelectedImage, setIsSelectedImage] = useState(false);
-    const [formData, setFormData] = useState({
-        title: '',
-        description: '',
-        tags: ''
-    });
+    // const [formData, setFormData] = useState({
+    //     title: '',
+    //     description: '',
+    //     tags: ''
+    // });
     const inputTitleRef = useRef();
+    const inputDescriptionRef = useRef();
 
-    const [image, setImage] = useState({
-        imageFile: null,
-        imageUrl: null,
+    const [files, setFiles] = useState({
+        files: [],
+        filesUrl: [],
     });
     
     return (
         <div>
-            <Options inputTitleRef={inputTitleRef} isSelectedImage={isSelectedImage} image={image} formData={formData} />
+            <Options inputTitleRef={inputTitleRef} inputDescriptionRef={inputDescriptionRef} isSelectedImage={isSelectedImage} files={files} />
             <Box maxW="1024px" textAlign="center" mx="auto">
                 { !isSelectedImage && 
                     <>
@@ -30,8 +31,8 @@ export function DropZone() {
                 }
                 { 
                     isSelectedImage ? 
-                    <PostForm inputTitleRef={inputTitleRef} image={image} setFormData={setFormData} /> :
-                    <Upload setImage={setImage} setIsSelectedImage={setIsSelectedImage} />                    
+                    <PostForm inputTitleRef={inputTitleRef} inputDescriptionRef={inputDescriptionRef} files={files} /> :
+                    <Upload setFiles={setFiles} setIsSelectedImage={setIsSelectedImage} />                    
                 }
             </Box>
         </div>
