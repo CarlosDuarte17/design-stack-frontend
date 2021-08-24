@@ -18,6 +18,7 @@ import {
     ModalBody,
     ModalFooter,
     Button,
+    AspectRatio
 } from '@chakra-ui/react';
 
 import { AiFillEye } from 'react-icons/ai';
@@ -29,14 +30,27 @@ export function PostItem({ post }) {
         <div>
             <GridItem>
                 <Box overflow="hidden">
-                    <Image onClick={ onOpen }
+                <AspectRatio 
+                    borderRadius="8px"
+                    h="206px" 
+                    objectFit="cover"
+                    w="100%"
+                    >
+                        <iframe
+                            title="file"
+                            src={post.media.data[0].mediaFullPath}
+                            allowFullScreen 
+                            onClick={ onOpen }                               
+                        />
+                </AspectRatio>
+                    {/* <Image onClick={ onOpen }
                         borderRadius="8px"
                         h="206px" 
                         objectFit="cover"
                         w="100%"
                         // data-src={post.media.data[0].mediaFullPath}
                         // src={post.media.data[0].mediaFullPath}
-                        />                        
+                        />                         */}
                 </Box>
                 <Flex 
                     alignItems="center"
