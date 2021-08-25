@@ -30,10 +30,12 @@ export function Body({ post }) {
                     <AspectRatio w="100%" h="100%" ratio={1}>
                         <video
                             src={currentMedia.media}
-                            onMouseOver={(e) => e.target.play()}  
-                            onMouseOut={(e) => e.target.pause()}
-                            loop  
-                            muted              
+                            // onMouseOver={(e) => e.target.play()}  
+                            // onMouseOut={(e) => e.target.pause()}
+                            loop
+                            preload
+                            muted
+                            autoPlay           
                         ></video>
                     </AspectRatio> :
                     <Image 

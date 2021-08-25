@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import { Link as ReactLink } from 'react-router-dom';
+
 import {    
     Modal,
     ModalOverlay,
@@ -9,8 +11,6 @@ import {
     Avatar,
     ModalHeader,
     ModalBody,
-    ModalFooter,
-    Button,
     useDisclosure,
     Text,
     Link,
@@ -21,6 +21,7 @@ import { PostButton, Header } from './components'
 
 import { FaComment, FaFolderPlus, FaHeart, FaInfoCircle, FaShare } from 'react-icons/fa';
 import { Body } from './components/Body';
+
 
 export function Info({ onClose, isOpen, post}) {
     const { isOpen: isOpenTag, onOpen: onOpenTag, onClose: onCloseTag } = useDisclosure();
@@ -47,7 +48,8 @@ export function Info({ onClose, isOpen, post}) {
                             marginBlockStart={{ base: '10px', lg: '0' }}
                             h="max-content">
                             <Avatar 
-                                display={{ base: 'none', lg: 'block' }}
+                                name={post.user.name[0]}
+                                display={{ base: 'none', lg: 'flex' }}
                                 h="40px"
                                 w="40px"></Avatar>
                             <PostButton icon={FaComment} />
@@ -118,7 +120,7 @@ export function Info({ onClose, isOpen, post}) {
                 {
                     post.tags.map(tag => (
                          <Link 
-                            as={Link} 
+                            as={ReactLink} 
                             border="1px solid"
                             borderColor="gray.300"
                             borderRadius="4px"
@@ -128,7 +130,7 @@ export function Info({ onClose, isOpen, post}) {
                             bgColor="white"
                             key={tag.id}
                             _hover={{ bgColor: 'gray.100', textDecoration: 'none' }}
-                            to={`tags/${tag.tag}`}>{ tag.tag }</Link>
+                            to={`/tags/${ tag.slug }`}>{ tag.tag }</Link>
                     ))
                 }
             </Flex>

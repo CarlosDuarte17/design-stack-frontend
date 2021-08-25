@@ -41,7 +41,7 @@ export function Form({ files, inputTitleRef, inputDescriptionRef }) {
                 />
             <Box h={576}>
             {
-                files.files[0].type === 'video' ?
+                files.files[0].type === 'video/mp4' ?
                 <AspectRatio w="100%" h="100%" ratio={1}>
                     <iframe
                         title="file"

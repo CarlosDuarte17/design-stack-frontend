@@ -11,9 +11,9 @@ import {
 } from '@chakra-ui/react';
 
 import { PostItem } from './components/PostItem/PostItem';
-import { getPosts } from '../../../../../../../../../../providers/API';
+import { getPostByTag, getPosts } from '../../../../../../../../../../providers/API';
 
-export function Gallery() {
+export function Gallery({ tag, setTotalShots }) {
 
     const [page, setPage] = useState(1);
     const [state, setState] = useState({
@@ -21,8 +21,8 @@ export function Gallery() {
         current_page: 0
     });
 
-    const { data, isRefetchError, isLoading, isFetching } = useQuery(['posts', page], () => getPosts(page), {
-        // refetchOnWindowFocus: false,
+    const { data, isRefetchError, isLoading, isFetching } = useQuery([tag ? 'postsbytag' : 'posts', page], () => 
+        tag ? getPostByTag(tag, page) : getPosts(page), {
         keepPreviousData: true,
         onSuccess: (data) => {
             if (data.message) {
@@ -32,6 +32,7 @@ export function Gallery() {
             if (state.page !== page) {
                 setState((prev) => ({page, posts: [...prev.posts, ...data.data]}));    
             }
+            setTotalShots && setTotalShots(data.total);
         },
         onerror: (error) =>{
             console.log(error)
@@ -84,7 +85,7 @@ export function Gallery() {
             </Flex>
         }
         {
-        data?.meta.to !== data?.meta.total ?
+        data?.links.next ?
             (
                 <Flex
                 justifyContent="center"
@@ -98,7 +99,7 @@ export function Gallery() {
                     // prevent disable the Load More button until we know a next posts is available
                     disabled={!(data?.links.next)}
                     >
-                    Load More
+                    Load More Shots
                 </Button>
                 </Flex>
             ) :

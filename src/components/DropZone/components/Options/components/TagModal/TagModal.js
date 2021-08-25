@@ -46,9 +46,9 @@ export function TagModal({ onClose, isOpen, files, inputTitleRef, inputDescripti
           formData.append(`files[]`, file);
         }
         formData.append('tags', inputTagRef.current.value);
-        for (var pair of formData.entries()) {
-          console.log(pair[0] + ', ' + pair[1]);
-        }
+        // for (var pair of formData.entries()) {
+        //   console.log(pair[0] + ', ' + pair[1]);
+        // }
         mutate(formData);
         return 'error';
       },
