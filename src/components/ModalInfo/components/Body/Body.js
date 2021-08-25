@@ -38,10 +38,8 @@ export function Body({ post }) {
                     <AspectRatio w="100%" h="100%" ratio={1}>
                         <video
                             src={currentMedia.media}
-                            // onMouseOver={(e) => e.target.play()}  
-                            // onMouseOut={(e) => e.target.pause()}
                             loop
-                            preload
+                            preload="true"
                             muted
                             autoPlay           
                         ></video>
@@ -58,7 +56,7 @@ export function Body({ post }) {
             </Box>
             {
                 post?.media.data.length > 1 &&
-            <Flex 
+                <Flex 
                 overflow="hidden"
                 gridColumnGap="14px" 
                 justifyContent="center" 
@@ -68,12 +66,15 @@ export function Body({ post }) {
                     post?.media.data.map((media, i) => {
                         return media.type === 'video' ?
                         (<AspectRatio 
-                            border="1px solid transparent"
+                            border="2px solid transparent"
                             borderRadius="12px"
-                            h="58px" 
+                            cursor="pointer"
+                            h="60px" 
                             objectFit="cover"
                             w="76px"
                             overflow="hidden"
+                            borderColor={ media.mediaFullPath === currentMedia.media ? '#ea4c89' : ''}
+                            _hover={{ borderColor: 'pink.500'}}
                             >
                             <video
                                 src={media.mediaFullPath}
@@ -81,31 +82,26 @@ export function Body({ post }) {
                                 onMouseOut={(e) => e.target.pause()}
                                 onClick={() => handleChangeMedia({ media: media.mediaFullPath, type: media.type })}
                                 loop  
-                                muted  
+                                muted
                                 key={post.id + '' + i}
                             ></video>
                         </AspectRatio>) :
                         (<Image 
-                            border="1px solid transparent"
+                            border="2px solid transparent"
                             borderRadius="12px"
-                            h="58px" 
+                            h="60px" 
                             w="76px"
+                            cursor="pointer"
                             objectFit="cover"
                             data-src={media.mediaFullPath}
                             src={media.mediaFullPath}
                             key={post.id + '' + i}
+                            borderColor={ media.mediaFullPath === currentMedia.media && '#ea4c89'}
                             onClick={() => handleChangeMedia({ media: media.mediaFullPath, type: media.type })}
+                            _hover={{ borderColor: 'pink.500'}}
                             />)
                     })
                 }
-                {/* <Image 
-                    border="1px solid transparent"
-                    borderRadius="12px"
-                    h="58px" 
-                    w="76px"
-                    objectFit="cover"
-                    src="https://i.picsum.photos/id/818/536/354.jpg?hmac=9b5A8R6fKbs0srgPo_LmKDOY67GM1hHi9dAeiqMCTEc"                                                          
-                    /> */}
             </Flex>
             }
             <Box

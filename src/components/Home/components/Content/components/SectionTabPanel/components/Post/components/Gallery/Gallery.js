@@ -32,7 +32,8 @@ export function Gallery({ tag, setTotalShots }) {
             if (state.page !== page) {
                 setState((prev) => ({page, posts: [...prev.posts, ...data.data]}));    
             }
-            setTotalShots && setTotalShots(data.total);
+            
+            setTotalShots && setTotalShots(data.meta.total);
         },
         onerror: (error) =>{
             console.log(error)

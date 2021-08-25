@@ -66,7 +66,7 @@ export function TagModal({ onClose, isOpen, files, inputTitleRef, inputDescripti
           <ModalBody px={0} py={6}>
             <Text>
               <Text as="span" fontWeight="bold">
-                Tags&bnsp;
+                Tags&nbsp;
               </Text>
               (maximun 10)
             </Text>
