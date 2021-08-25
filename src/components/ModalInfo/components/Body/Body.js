@@ -7,13 +7,21 @@ import {
     Text
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { useEffect } from 'react';
 
 export function Body({ post }) {
 
     const [currentMedia, setCurrentMedia] = useState({
-        media: post.media.data[0].mediaFullPath,
-        type: post.media.data[0].type,
+        media: post?.media.data[0].mediaFullPath,
+        type: post?.media.data[0].type,
     });
+
+    useEffect(() => {
+        setCurrentMedia({
+            media: post?.media.data[0].mediaFullPath,
+            type: post?.media.data[0].type,
+        })
+    }, [post])
 
     function handleChangeMedia( media ) {
         setCurrentMedia(media);
@@ -43,12 +51,13 @@ export function Body({ post }) {
                         h="100%"
                         objectFit="cover"
                         w="100%" 
+                        data-src={currentMedia.media}
                         src={currentMedia.media}
                     />
                 }
             </Box>
             {
-                post.media.data.length > 1 &&
+                post?.media.data.length > 1 &&
             <Flex 
                 overflow="hidden"
                 gridColumnGap="14px" 
@@ -56,7 +65,7 @@ export function Body({ post }) {
                 marginBlockStart="46px"
                 wrap={{ base: 'wrap', lg: 'nowrap' }}>
                 { 
-                    post.media.data.map((media, i) => {
+                    post?.media.data.map((media, i) => {
                         return media.type === 'video' ?
                         (<AspectRatio 
                             border="1px solid transparent"
@@ -82,6 +91,7 @@ export function Body({ post }) {
                             h="58px" 
                             w="76px"
                             objectFit="cover"
+                            data-src={media.mediaFullPath}
                             src={media.mediaFullPath}
                             key={post.id + '' + i}
                             onClick={() => handleChangeMedia({ media: media.mediaFullPath, type: media.type })}
@@ -104,7 +114,7 @@ export function Body({ post }) {
                 marginBlockStart="60px"
                 >
                 <Text>
-                    { post.description }
+                    { post?.description }
                 </Text>
             </Box>
         </ModalBody>            

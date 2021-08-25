@@ -20,21 +20,21 @@ export function Header({ post }) {
             justifyContent={{ base: 'center', sm: 'space-between'}}
             p={0}>
             <Flex gridColumnGap="16px">
-                <Avatar name={ post.user.name }></Avatar>
+                <Avatar name={ post?.user.name }></Avatar>
                 <Flex 
                     direction="column"
                     justifyContent="space-between">
                     <Heading 
                         as="h1"
                         fontSize="1rem">
-                        { post.title }
+                        { post?.title }
                     </Heading>
                     <Flex 
                         fontSize="0.875rem"
                         fontWeight="normal"
                         gridColumnGap="8px">
                         <Link>
-                            { post.user.name }
+                            { post?.user.name }
                         </Link>
                         <Text 
                             as="span"

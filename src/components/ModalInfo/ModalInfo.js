@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link as ReactLink } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link as ReactLink,  useParams } from 'react-router-dom';
 
 import {    
     Modal,
@@ -21,10 +21,24 @@ import { PostButton, Header } from './components'
 
 import { FaComment, FaFolderPlus, FaHeart, FaInfoCircle, FaShare } from 'react-icons/fa';
 import { Body } from './components/Body';
+import { useQuery } from 'react-query';
+import { getPost } from '../../providers/API';
 
 
-export function Info({ onClose, isOpen, post}) {
+export function ModalInfo() {
+    const { shot } = useParams();
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const { isOpen: isOpenTag, onOpen: onOpenTag, onClose: onCloseTag } = useDisclosure();
+
+    const { data: post, isLoading } = useQuery(['shot', shot], () => getPost( shot ));
+
+    useEffect(() => {
+        onOpen();
+    }, [onOpen])
+
+    if (isLoading) {
+        <h2>Loagin....</h2>
+    }
 
     return (
         <div>
@@ -36,7 +50,7 @@ export function Info({ onClose, isOpen, post}) {
                     px={{ base: '20px', lg: '120px'}} 
                     paddingBlock={{ base: '20px', lg: '64px'}}>
                     <Box w="768px">
-                        <Header post={post} />
+                        <Header post={post?.data} />
                         <ModalCloseButton />
                         <Flex 
                             gridGap="12px"
@@ -48,7 +62,7 @@ export function Info({ onClose, isOpen, post}) {
                             marginBlockStart={{ base: '10px', lg: '0' }}
                             h="max-content">
                             <Avatar 
-                                name={post.user.name[0]}
+                                name={post?.data.user.name[0]}
                                 display={{ base: 'none', lg: 'flex' }}
                                 h="40px"
                                 w="40px"></Avatar>
@@ -58,7 +72,7 @@ export function Info({ onClose, isOpen, post}) {
                             <PostButton icon={FaFolderPlus} />
                             <PostButton icon={FaHeart} />
                         </Flex>
-                        <Body post={post} />
+                        <Body post={post?.data} />
                     </Box>
                 </Flex>
             </ModalContent>
@@ -83,9 +97,7 @@ export function Info({ onClose, isOpen, post}) {
                 color="gray.600"
                 marginBlock="12px 24px">
                 Posted&nbsp;
-                <Text as="time" dateTime={ format(new Date(post.created_at), 'yyyy-MM-d') }>
-                    { format(new Date(post.created_at), 'MMM d, yyyy') }
-                </Text>
+                
             </Text>
             <Flex gridColumnGap="40px">
                 <Box>
@@ -116,9 +128,10 @@ export function Info({ onClose, isOpen, post}) {
             <Text marginBlock="24px 8px">Tags</Text>
             <Flex
                 gridColumnGap="8px"
+        
                 wrap="wrap">
                 {
-                    post.tags.map(tag => (
+                    post?.data.tags.map(tag => (
                          <Link 
                             as={ReactLink} 
                             border="1px solid"
