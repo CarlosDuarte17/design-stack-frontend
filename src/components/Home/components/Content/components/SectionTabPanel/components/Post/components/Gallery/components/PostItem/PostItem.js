@@ -10,47 +10,45 @@ import {
     Badge,
     Icon,
     useDisclosure,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalCloseButton,
-    ModalBody,
-    ModalFooter,
-    Button,
     AspectRatio
 } from '@chakra-ui/react';
 
 import { AiFillEye } from 'react-icons/ai';
 import { HeartIcon } from '../../../../../../../../../../../../assets/icons/Icons';
+import { Info } from './components';
 
 export function PostItem({ post }) {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
         <div>
             <GridItem>
-                <Box overflow="hidden">
-                <AspectRatio 
-                    borderRadius="8px"
-                    h="206px" 
-                    objectFit="cover"
-                    w="100%"
-                    >
-                        <iframe
-                            title="file"
-                            src={post.media.data[0].mediaFullPath}
-                            allowFullScreen 
-                            onClick={ onOpen }                               
-                        />
-                </AspectRatio>
-                    {/* <Image onClick={ onOpen }
+                <Box overflow="hidden" borderRadius="8px">
+                {
+                    post.media.data[0].type === 'image' ?
+                    <Image onClick={ onOpen }
                         borderRadius="8px"
                         h="206px" 
                         objectFit="cover"
                         w="100%"
-                        // data-src={post.media.data[0].mediaFullPath}
-                        // src={post.media.data[0].mediaFullPath}
-                        />                         */}
+                        src={post.media.data[0].mediaFullPath}
+                        /> :               
+                    <AspectRatio 
+                        borderRadius="8px"
+                        h="206px" 
+                        objectFit="cover"
+                        w="100%"
+                        onClick={ onOpen }     
+                        >
+                            <video
+                                src={post.media.data[0].mediaFullPath}
+                                onMouseOver={(e) => e.target.play()}  
+                                onMouseOut={(e) => e.target.pause()}
+                                loop  
+                                muted                
+                            ></video>
+                    </AspectRatio>
+                }
+                    
                 </Box>
                 <Flex 
                     alignItems="center"
@@ -103,21 +101,7 @@ export function PostItem({ post }) {
                     </Flex>
                 </Flex>
             </GridItem>
-            <Modal onClose={onClose} size="full" isOpen={isOpen} scrollBehavior="outside">
-                <ModalOverlay />
-                <ModalContent>
-                    <ModalHeader>Modal Title</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody>
-                        <Text>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero dolores adipisci sed ab explicabo eligendi, assumenda qui ut iusto soluta vero autem blanditiis! Rerum deserunt saepe, delectus illum obcaecati perferendis?
-                        </Text>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button onClick={onClose}>Close</Button>
-                    </ModalFooter>
-                </ModalContent>
-            </Modal>
+            <Info isOpen={isOpen} onClose={onClose} post={post} />
     </div>
     )
 }

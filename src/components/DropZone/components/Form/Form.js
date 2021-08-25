@@ -41,7 +41,7 @@ export function Form({ files, inputTitleRef, inputDescriptionRef }) {
                 />
             <Box h={576}>
             {
-                files.files[0].type === 'video/mp4' ?
+                files.files[0].type === 'video' ?
                 <AspectRatio w="100%" h="100%" ratio={1}>
                     <iframe
                         title="file"
@@ -56,7 +56,11 @@ export function Form({ files, inputTitleRef, inputDescriptionRef }) {
                     w="100%" />
             }
             </Box>
-            <Flex gridColumnGap="10px" justifyContent="center" marginBlockStart="10px" wrap={{ base: 'wrap', lg: 'nowrap' }}>
+            <Flex 
+                gridColumnGap="10px" 
+                justifyContent="center" 
+                marginBlockStart="10px" 
+                wrap={{ base: 'wrap', lg: 'nowrap' }}>
                 { 
                     files.files.length > 1 ?
                     files.files.slice(1).map((file, i) => {

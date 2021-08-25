@@ -19,7 +19,7 @@ import { Footer } from './components/Footer';
 const queryClient = new QueryClient();
 
 const breakpoints = createBreakpoints({
-  sm: "640px",
+  sm: "576px",
   md: "768px",
   lg: "1024px",
   xl: "1280px",

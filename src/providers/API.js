@@ -1,5 +1,5 @@
 // set the authentication token with personal access token
-const token = '10|gewJaDqZbxmyztb6pJ2ML6ktSDzJojUX8P7WMM6b';
+const token = '10|pX3Uyb8nneEioEmf2M6W9YdxzYzPeFYHwe0ZrRRh';
 
 export async function fetchPost( formData) {
     const resp = await fetch(`http://127.0.0.1:8000/api/posts`, {
