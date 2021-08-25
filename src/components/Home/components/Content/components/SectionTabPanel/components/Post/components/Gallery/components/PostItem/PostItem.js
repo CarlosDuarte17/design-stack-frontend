@@ -44,7 +44,7 @@ export function PostItem({ post }) {
                                 onMouseOver={(e) => e.target.play()}  
                                 onMouseOut={(e) => e.target.pause()}
                                 loop  
-                                muted                
+                                muted              
                             ></video>
                     </AspectRatio>
                 }

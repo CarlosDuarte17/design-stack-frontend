@@ -28,11 +28,13 @@ export function Body({ post }) {
                 {
                     currentMedia.type === 'video' ?
                     <AspectRatio w="100%" h="100%" ratio={1}>
-                        <iframe
-                            title="file"
+                        <video
                             src={currentMedia.media}
-                            allowFullScreen
-                        />
+                            onMouseOver={(e) => e.target.play()}  
+                            onMouseOut={(e) => e.target.pause()}
+                            loop  
+                            muted              
+                        ></video>
                     </AspectRatio> :
                     <Image 
                         borderRadius="8px"
