@@ -8,14 +8,14 @@ import {
 } from '@chakra-ui/react';
 import { Link as ReactLink } from 'react-router-dom';
 
-import { User } from './components';
+import { Title, User } from './components';
 
 export function PostItem({ post }) {
     // const { isOpen, onOpen, onClose } = useDisclosure()
     return (
         <div>
             <GridItem>
-                <Box overflow="hidden" borderRadius="8px">
+                <Box position="relative" overflow="hidden" borderRadius="8px">
                 <Link as={ReactLink} to={`/shots/${ post.id }`}>
                 {
                     post.media.data[0].type === 'image' ?
@@ -42,8 +42,9 @@ export function PostItem({ post }) {
                     </AspectRatio>
                 }
                 </Link>
-                <User post={post} />
+                <Title />
                 </Box>
+                <User post={post} />
                 </GridItem>
                 {/* <Info isOpen={isOpen} onClose={onClose} post={post} /> */}
     </div>

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useQuery } from 'react-query';
+import React from 'react';
 import {
     Spinner,
     Button,
@@ -11,34 +10,8 @@ import {
 } from '@chakra-ui/react';
 
 import { PostItem } from './components/PostItem/PostItem';
-import { getPostByTag, getPosts } from '../../../../../../../../../../providers/API';
 
-export function Gallery({ tag, setTotalShots }) {
-
-    const [page, setPage] = useState(1);
-    const [state, setState] = useState({
-        posts: [],
-        current_page: 0
-    });
-
-    const { data, isRefetchError, isLoading, isFetching } = useQuery([tag ? 'postsbytag' : 'posts', page], () => 
-        tag ? getPostByTag(tag, page) : getPosts(page), {
-        keepPreviousData: true,
-        onSuccess: (data) => {
-            if (data.message) {
-                return;
-            }
-            // prevent array from repeating data
-            if (state.page !== page) {
-                setState((prev) => ({page, posts: [...prev.posts, ...data.data]}));    
-            }
-            
-            setTotalShots && setTotalShots(data.meta.total);
-        },
-        onerror: (error) =>{
-            console.log(error)
-        }
-    });
+export function Gallery({ data, isRefetchError, state, isLoading, isFetching, setPage }) {
 
     if (isRefetchError || (data && data.message)) {
         return (

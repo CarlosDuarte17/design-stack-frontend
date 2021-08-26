@@ -17,7 +17,7 @@ export async function fetchPost( formData) {
 }
 
 export async function getPosts( page ) {
-    
+    console.log('entra');
     const resp = await fetch(`http://127.0.0.1:8000/api/posts?page=${ page }`, {
         headers: {
             Accept: `application/json`,
@@ -55,9 +55,22 @@ export async function getUser() {
     return data;
 }
 
-export async function getPostByTag( tag, page ) {
+export async function getPostsByTag( tag, page ) {
     
-    const resp = await fetch(`http://127.0.0.1:8000/api/tags/${ tag }?page=${ page }`, {
+    const resp = await fetch(`http://127.0.0.1:8000/api/tags/${ tag }/posts?page=${ page }`, {
+        headers: {
+            Accept: `application/json`,
+            Authorization: `Bearer ${ token }`
+        }
+    })
+
+    const data = await resp.json();
+    return data;
+}
+
+export async function getTag( tag ) {
+    
+    const resp = await fetch(`http://127.0.0.1:8000/api/tags/${ tag }`, {
         headers: {
             Accept: `application/json`,
             Authorization: `Bearer ${ token }`
