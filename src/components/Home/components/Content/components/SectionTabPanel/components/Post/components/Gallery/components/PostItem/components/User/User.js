@@ -1,31 +1,9 @@
-import {
-  Avatar,
-  Badge,
-  Flex,
-  Icon,
-  Text,
-  WrapItem,
-  Button,
-} from '@chakra-ui/react';
 import React from 'react';
-import { AiFillEye } from 'react-icons/ai';
-import { FaHeart } from 'react-icons/fa';
-import { useMutation } from 'react-query';
-import { setLike } from '../../../../../../../../../../../../../../providers/API';
+import { Avatar, Badge, Flex, Text, WrapItem, Button } from '@chakra-ui/react';
+import { faEye, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export function User({ post }) {
-  const { mutate } = useMutation(['like', post.id], setLike, {
-    onSuccess: (data) => {
-      console.log(data);
-      post.viewer_liked = data.data.viewer_liked;
-      post.likes = data.data.likes;
-    }
-  });
-
-  function handleLikePost() {
-    mutate(post.id);
-  }
-
+export function User({ post, handleLikePost }) {
   return (
     <Flex
       alignItems="center"
@@ -33,7 +11,7 @@ export function User({ post }) {
       justifyContent="space-between"
       marginBlockStart="8px"
     >
-      <Flex alignItems="center" sx={{ gap: '8px' }}>
+      <Flex maxW="60%" alignItems="center" sx={{ gap: '2px' }}>
         <WrapItem>
           <Avatar h="24px" name={post.user.name[0]} w="24px" />
         </WrapItem>
@@ -41,11 +19,9 @@ export function User({ post }) {
           as="span"
           fontWeight="600"
           overflow="hidden"
-          sx={{
-            display: '-webkit-box',
-            WebkitLineClamp: '1',
-            WebkitBoxOrient: 'vertical',
-          }}
+          textOverflow="ellipsis"
+          whiteSpace="nowrap"
+          title={post.user.name}
         >
           {post.user.name}
         </Text>
@@ -59,26 +35,41 @@ export function User({ post }) {
           PRO
         </Badge>
       </Flex>
-      <Flex alignItems="center" fontSize="0.75rem" sx={{ gap: '6px' }}>
+      <Flex
+        alignItems="center"
+        fontSize="0.75rem"
+        sx={{ gap: '8px' }}
+        w="max-content"
+      >
         <Button
           bgColor="inherit"
+          color={post.viewer_liked ? 'pink.500' : 'gray.400'}
+          h="16px"
+          minWidth="16px"
+          w="16px"
+          p={0}
+          _hover={{ bgColor: 'none', color: 'pink.500' }}
+          _focus={{ border: 'none ' }}
+        >
+          <FontAwesomeIcon
+            icon={faHeart}
+            cursor="pointer"
+            onClick={handleLikePost}
+          />
+        </Button>
+        <Text as="span">{post.likes}</Text>
+        <Button
+          bgColor="inherit"
+          color="gray.400"
           h="16px"
           minWidth="16px"
           w="16px"
           p={0}
           _hover={{ bgColor: 'none' }}
-          _focus={{ border: 'none '}}
+          cursor="default"
         >
-          <Icon
-            as={FaHeart}
-            color={post.viewer_liked ? 'pink.500' : 'gray.400'}
-            cursor="pointer"
-            _hover={{ color: 'pink.500' }}
-            onClick={handleLikePost}
-          />
+          <FontAwesomeIcon icon={faEye} h="16px" w="16px" />
         </Button>
-        <Text as="span">{post.likes}</Text>
-        <Icon as={AiFillEye} color="gray.400" h="16px" w="16px" />
         <Text as="span">4.8k</Text>
       </Flex>
     </Flex>

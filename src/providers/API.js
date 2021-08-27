@@ -1,4 +1,5 @@
 // set the authentication token with personal access token
+// const token = '1|vCvH5TeOUzA9QzuyMM2zvLDhHHhTEPkM9OU2ro6X';
 const token = '10|r2d59tsorjmkBLqd340hADWnYuG4LuXjDUwdapHI';
 
 export async function createPost(formData) {
@@ -82,7 +83,7 @@ export async function getTag(tag) {
   return data;
 }
 
-export async function setLike(post) {
+export async function setlikePost(post) {
   const resp = await fetch(`http://127.0.0.1:8000/api/posts/${post}/like`, {
     headers: {
       Accept: `application/json`,

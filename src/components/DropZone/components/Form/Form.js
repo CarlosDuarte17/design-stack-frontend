@@ -2,9 +2,11 @@ import React, { useContext } from 'react';
 import { Textarea, Image, Box, AspectRatio, Flex } from '@chakra-ui/react';
 
 import { UploadContext } from '../../contexts/UploadContext/UploadContext';
+import { Media } from '../../../Media';
 
 export function Form() {
-  const { files, inputTitleRef, inputDescriptionRef } = useContext(UploadContext);
+  const { files, inputTitleRef, inputDescriptionRef } =
+    useContext(UploadContext);
   return (
     <Box cursor="pointer" maxW="768px" mx="auto" marginBlockStart="32px">
       <Textarea
@@ -18,14 +20,11 @@ export function Form() {
         _focus={{ border: 'none' }}
         ref={inputTitleRef}
       />
-      <Box h={576}>
-        {files.files[0].type === 'video/mp4' ? (
-          <AspectRatio w="100%" h="100%" ratio={1}>
-            <iframe title="file" src={files.filesUrl[0]} allowFullScreen />
-          </AspectRatio>
-        ) : (
-          <Image h="100%" objectFit="cover" src={files.filesUrl[0]} w="100%" />
-        )}
+      <Box h={576} cursor="default">
+        <Media
+          type={files.files[0].type.includes('video') ? 'video' : 'image'}
+          media={files.filesUrl[0]}
+        />
       </Box>
       <Flex
         gridColumnGap="10px"
@@ -37,24 +36,22 @@ export function Form() {
           ? files.files.slice(1).map((file, i) => {
               return file.type === 'video/mp4' ? (
                 <AspectRatio
-                  border="1px dashed"
                   borderColor="gray.500"
                   borderRadius="12px"
                   h="100px"
                   w="100px"
                   key={i}
+                  cursor="default"
+                  overflow="hidden"
                 >
-                  <iframe
-                    title="file"
-                    src={files.filesUrl[i + 1]}
-                    allowFullScreen
-                  />
+                  <video src={files.filesUrl[i + 1]} loop muted></video>
                 </AspectRatio>
               ) : (
                 <Image
                   border="1px dashed"
                   borderColor="gray.500"
                   borderRadius="12px"
+                  cursor="default"
                   h="100px"
                   w="100px"
                   objectFit="cover"

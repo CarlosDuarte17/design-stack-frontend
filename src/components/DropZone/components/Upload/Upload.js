@@ -17,7 +17,7 @@ export function Upload() {
     isDragAccept,
     isDragReject,
   } = useDropzone({
-    accept: 'image/*, video/*',
+    accept: 'image/*, video/mp4',
     maxFiles: 5,
   });
 

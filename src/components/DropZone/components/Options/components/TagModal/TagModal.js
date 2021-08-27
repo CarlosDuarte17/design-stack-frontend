@@ -52,7 +52,7 @@ export function TagModal({
     let formData = new FormData();
     formData.append('title', inputTitleRef.current.value);
     formData.append('description', inputDescriptionRef.current.value);
-    console.log(files.files);
+    // console.log(files.files);
 
     for (const file of files.files) {
       formData.append(`files[]`, file);

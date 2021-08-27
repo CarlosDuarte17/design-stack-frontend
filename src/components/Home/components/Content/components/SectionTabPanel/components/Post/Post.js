@@ -14,6 +14,7 @@ export function Post() {
     hasNextPage,
   } = useInfiniteQuery('posts', getPosts, {
     getNextPageParam: lastPage => {
+      // console.log(lastPage);
       if (lastPage.links.next) {
         return lastPage.meta.current_page + 1;
       }

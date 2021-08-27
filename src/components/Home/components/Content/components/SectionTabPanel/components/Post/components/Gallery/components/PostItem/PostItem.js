@@ -1,11 +1,26 @@
 import React, { useRef } from 'react';
-import { Box, GridItem, Image, AspectRatio, Link } from '@chakra-ui/react';
+import { useMutation } from 'react-query';
 import { Link as ReactLink } from 'react-router-dom';
 
+import { Box, GridItem, Image, AspectRatio, Link } from '@chakra-ui/react';
+
 import { Title, User } from './components';
+import { setlikePost } from '../../../../../../../../../../../../providers/API';
 
 export function PostItem({ post }) {
   const videoRef = useRef();
+
+  const { mutate } = useMutation(['likePost', post.id], setlikePost, {
+    onSuccess: postUpdated => {
+      post.viewer_liked = postUpdated.data.viewer_liked;
+      post.likes = postUpdated.data.likes;
+    },
+  });
+
+  function handleLikePost() {
+    mutate(post.id);
+  }
+
   return (
     <div>
       <GridItem>
@@ -48,9 +63,13 @@ export function PostItem({ post }) {
               </AspectRatio>
             )}
           </Link>
-          <Title title={post.title} viewer_liked={post.viewer_liked} />
+          <Title
+            handleLikePost={handleLikePost}
+            title={post.title}
+            viewer_liked={post.viewer_liked}
+          />
         </Box>
-        <User post={post} />
+        <User handleLikePost={handleLikePost} post={post} />
       </GridItem>
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useMutation, useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import {
@@ -12,17 +13,16 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
-import { PostButton, Header, Body, Tags } from './components';
-
 import {
-  FaComment,
-  FaFolderPlus,
-  FaHeart,
-  FaInfoCircle,
-  FaShare,
-} from 'react-icons/fa';
-import { useQuery } from 'react-query';
-import { getPost } from '../../providers/API';
+  faComment,
+  faFolderPlus,
+  faHeart,
+  faInfoCircle,
+  faShare,
+} from '@fortawesome/free-solid-svg-icons';
+
+import { PostButton, Header, Body, Tags } from './components';
+import { getPost, setlikePost } from '../../providers/API';
 
 export function ModalInfo() {
   const { shot } = useParams();
@@ -34,9 +34,20 @@ export function ModalInfo() {
   } = useDisclosure();
   const Navigate = useNavigate();
 
-  const { data: post, isLoading } = useQuery(['shot', shot], () =>
+  const { data: post, isLoading } = useQuery(['post', shot], () =>
     getPost(shot)
   );
+
+  // const { mutate } = useMutation(['like', post?.id], setLike, {
+  //   onSuccess: postUpdated => {
+  //     post.viewer_liked = postUpdated.data.viewer_liked;
+  //     post.likes = postUpdated.data.likes;
+  //   },
+  // });
+
+  // function handleLikePost() {
+  //   mutate(post?.id);
+  // }
 
   if (isLoading) {
     <h2>Loading....</h2>;
@@ -79,15 +90,15 @@ export function ModalInfo() {
                   h="40px"
                   w="40px"
                 ></Avatar>
-                <PostButton label="Feedback" icon={FaComment} />
-                <PostButton label="Share" icon={FaShare} />
+                <PostButton label="Feedback" icon={faComment} />
+                <PostButton label="Share" icon={faShare} />
                 <PostButton
                   label="Shot details"
-                  icon={FaInfoCircle}
-                  onOpenTag={onOpenTag}
+                  icon={faInfoCircle}
+                  onClick={onOpenTag}
                 />
-                <PostButton label="Save" icon={FaFolderPlus} />
-                <PostButton label="Like" icon={FaHeart} />
+                <PostButton label="Save" icon={faFolderPlus} />
+                <PostButton label="Like" icon={faHeart} />
               </Flex>
               <Body post={post?.data} />
             </Box>

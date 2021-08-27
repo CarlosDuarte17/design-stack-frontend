@@ -9,6 +9,8 @@ import {
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 
+import { Media } from '../../../Media';
+
 export function Body({ post }) {
   const [currentMedia, setCurrentMedia] = useState({
     media: post?.media.data[0].FullPath,
@@ -28,25 +30,7 @@ export function Body({ post }) {
   return (
     <ModalBody p={0}>
       <Box marginBlockStart="40px" h={576} overflow="hidden">
-        {currentMedia.type === 'video' ? (
-          <AspectRatio w="100%" h="100%" ratio={1}>
-            <video
-              src={currentMedia.media}
-              loop
-              preload="true"
-              muted
-              autoPlay
-            ></video>
-          </AspectRatio>
-        ) : (
-          <Image
-            borderRadius="8px"
-            h="100%"
-            objectFit="cover"
-            w="100%"
-            src={currentMedia.media}
-          />
-        )}
+        <Media type={currentMedia.type} media={currentMedia.media} />
       </Box>
       {post?.media.data.length > 1 && (
         <Flex
@@ -66,10 +50,9 @@ export function Body({ post }) {
                 objectFit="cover"
                 w="76px"
                 overflow="hidden"
-                borderColor={
-                  media.FullPath === currentMedia.media ? '#ea4c89' : ''
-                }
+                borderColor={media.FullPath === currentMedia.media && '#ea4c89'}
                 _hover={{ borderColor: 'pink.500' }}
+                key={post.id + '' + i}
               >
                 <video
                   src={media.FullPath}
@@ -83,7 +66,6 @@ export function Body({ post }) {
                   }
                   loop
                   muted
-                  key={post.id + '' + i}
                 ></video>
               </AspectRatio>
             ) : (
@@ -97,9 +79,7 @@ export function Body({ post }) {
                 data-src={media.FullPath}
                 src={media.FullPath}
                 key={post.id + '' + i}
-                borderColor={
-                  media.FullPath === currentMedia.media && '#ea4c89'
-                }
+                borderColor={media.FullPath === currentMedia.media && '#ea4c89'}
                 onClick={() =>
                   handleChangeMedia({
                     media: media.FullPath,
