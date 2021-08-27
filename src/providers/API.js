@@ -78,6 +78,7 @@ export async function getTag(tag) {
   });
 
   const data = await resp.json();
+  console.log(data);
   return data;
 }
 

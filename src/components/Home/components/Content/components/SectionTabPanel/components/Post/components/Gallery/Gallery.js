@@ -6,7 +6,6 @@ import {
   Flex,
   Alert,
   AlertIcon,
-  Badge,
 } from '@chakra-ui/react';
 
 import { PostItem } from './components/PostItem/PostItem';
@@ -14,11 +13,12 @@ import { PostItem } from './components/PostItem/PostItem';
 export function Gallery({
   data,
   isRefetchError,
-  state,
   isLoading,
   isFetching,
-  setPage,
+  hasNextPage,
+  fetchNextPage
 }) {
+
   if (isRefetchError || (data && data.message)) {
     return (
       <Alert marginBlockStart="20px" status="error">
@@ -29,26 +29,26 @@ export function Gallery({
     );
   }
 
-  if (data?.data.length === 0) {
+  if (data?.pages[0].data.length === 0) {
     return (
       <Alert marginBlockStart="20px" status="info">
         <AlertIcon />
-        there are currently no posts
+        There are currently no posts
       </Alert>
     );
   }
 
   return (
-    <>
+    <React.Fragment>
       <Grid
         marginBlockStart="36px"
         grid-auto-rows="max-content"
         templateColumns="repeat(auto-fill, minmax(274px, 1fr))"
         gap="36px"
       >
-        {state.posts.map(post => (
-          <PostItem key={post.id} post={post} />
-        ))}
+        {data?.pages.map(page =>
+          page?.data.map(post => <PostItem key={post.id} post={post} />)
+        )}
       </Grid>
       {(isLoading || isFetching) && (
         <Flex marginBlockStart="36px" display="flex" justifyContent="center">
@@ -60,36 +60,63 @@ export function Gallery({
           />
         </Flex>
       )}
-      {data?.links.next ? (
+      {hasNextPage && (
         <Flex justifyContent="center" marginBlockStart="20px">
           <Button
             size="sm"
             colorScheme="pink"
-            onClick={() => {
-              if (data?.links.next) {
-                setPage(old => old + 1);
-              }
-            }}
+            onClick={fetchNextPage}
             // prevent disable the Load More button until we know a next posts is available
-            disabled={!data?.links.next}
+            disabled={!hasNextPage}
           >
             Load More Shots
           </Button>
         </Flex>
-      ) : (
-        <Flex justifyContent="flex-end">
-          <Badge
-            marginBlockStart="20px"
-            colorScheme="whatsapp"
-            fontSize="0.875rem"
-            p={2}
-            size="xl"
-          >
-            {' '}
-            Total posts: {data?.meta.total}
-          </Badge>
-        </Flex>
       )}
-    </>
+    </React.Fragment>
   );
+
+  
+
+  // return (
+  //   <>
+  //     <Grid
+  //       marginBlockStart="36px"
+  //       grid-auto-rows="max-content"
+  //       templateColumns="repeat(auto-fill, minmax(274px, 1fr))"
+  //       gap="36px"
+  //     >
+  //       {state.posts.map(post => (
+  //         <PostItem key={post.id} post={post} />
+  //       ))}
+  //     </Grid>
+  //     {(isLoading || isFetching) && (
+  //       <Flex marginBlockStart="36px" display="flex" justifyContent="center">
+  //         <Spinner
+  //           size="xl"
+  //           emptyColor="gray.200"
+  //           color="pink.500"
+  //           thickness="4px"
+  //         />
+  //       </Flex>
+  //     )}
+  
+  //   </>
+  // );
 }
+
+
+// : (
+//   <Flex justifyContent="flex-end">
+//     <Badge
+//       marginBlockStart="20px"
+//       colorScheme="whatsapp"
+//       fontSize="0.875rem"
+//       p={2}
+//       size="xl"
+//     >
+//       {' '}
+//       Total posts: {data?.meta.total}
+//     </Badge>
+//   </Flex>
+// )}

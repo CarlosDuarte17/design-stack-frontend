@@ -1,42 +1,33 @@
-import { Container, Flex, Heading, Text } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import { useQuery } from 'react-query';
+import React from 'react';
+import { useInfiniteQuery, useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
+import { Container, Flex, Heading, Text } from '@chakra-ui/react';
+
 import { Gallery } from '../../components/Home/components/Content/components/SectionTabPanel/components/Post/components';
 import { getTag, getPostsByTag } from '../../providers/API';
 
 export function PostByTag() {
   let { tag } = useParams();
 
-  const [page, setPage] = useState(1);
-  const [state, setState] = useState({
-    posts: [],
-    current_page: 0,
-  });
+  const { data: tagInfo } = useQuery(['tag', tag], () => getTag(tag));
 
   const {
-    data: tagInfo,
+    data,
     isLoading,
     isFetching,
     isRefetchError,
-  } = useQuery(['tag', tag], () => getTag(tag));
-  const { data } = useQuery(
-    ['postsbytag', page],
-    () => getPostsByTag(tagInfo?.data.id, page),
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteQuery(
+    'posts',
+    ({ pageParam }) => getPostsByTag(tagInfo.data.id, pageParam),
     {
-      keepPreviousData: true,
       enabled: !!tagInfo?.data.id,
-      onSuccess: data => {
-        if (data.message) {
-          return;
+      getNextPageParam: lastPage => {
+        if (lastPage.links.next) {
+          return lastPage.meta.current_page + 1;
         }
-        // prevent array from repeating data
-        if (state.page !== page) {
-          setState(prev => ({ page, posts: [...prev.posts, ...data.data] }));
-        }
-      },
-      onerror: error => {
-        console.log(error);
+        return false;
       },
     }
   );
@@ -57,16 +48,14 @@ export function PostByTag() {
             graphic elements from the world’s best designers.
           </Text>
         </Flex>
-        {data && (
-          <Gallery
-            data={data}
-            isRefetchError={isRefetchError}
-            state={state}
-            isLoading={isLoading}
-            isFetching={isFetching}
-            setPage={setPage}
-          />
-        )}
+        <Gallery
+          data={data}
+          hasNextPage={hasNextPage}
+          isRefetchError={isRefetchError}
+          isLoading={isLoading}
+          isFetching={isFetching}
+          fetchNextPage={fetchNextPage}
+        />
       </Container>
     </div>
   );

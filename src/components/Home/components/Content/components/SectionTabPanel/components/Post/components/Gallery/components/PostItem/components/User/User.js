@@ -14,7 +14,13 @@ import { useMutation } from 'react-query';
 import { setLike } from '../../../../../../../../../../../../../../providers/API';
 
 export function User({ post }) {
-  const { mutate } = useMutation(['like', post.id], setLike);
+  const { mutate } = useMutation(['like', post.id], setLike, {
+    onSuccess: (data) => {
+      console.log(data);
+      post.viewer_liked = data.data.viewer_liked;
+      post.likes = data.data.likes;
+    }
+  });
 
   function handleLikePost() {
     mutate(post.id);
@@ -61,6 +67,7 @@ export function User({ post }) {
           w="16px"
           p={0}
           _hover={{ bgColor: 'none' }}
+          _focus={{ border: 'none '}}
         >
           <Icon
             as={FaHeart}
