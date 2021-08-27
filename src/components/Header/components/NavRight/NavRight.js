@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Link as ReactLink } from 'react-router-dom';
 
-import { SearchIcon } from '@chakra-ui/icons'
+import { SearchIcon } from '@chakra-ui/icons';
 import {
   Flex,
   InputGroup,
@@ -11,7 +11,7 @@ import {
   ListItem,
   Button,
   Spinner,
-  Avatar
+  Avatar,
 } from '@chakra-ui/react';
 
 import { UserImage } from './components';
@@ -22,7 +22,14 @@ export function NavRight() {
   return (
     <>
       <Flex>
-        <UnorderedList alignItems="center" display="flex" fontWeight={500} color="#6e6d7a" fontSize="0.875rem" styleType="none">
+        <UnorderedList
+          alignItems="center"
+          display="flex"
+          fontWeight={500}
+          color="#6e6d7a"
+          fontSize="0.875rem"
+          styleType="none"
+        >
           <ListItem marginInline="10px">
             <InputGroup maxW={124}>
               <InputLeftElement
@@ -32,34 +39,59 @@ export function NavRight() {
               />
               <Input
                 bgColor="#f3f3f4"
-                border='1px solid transparent'
-                borderColor='transparent'
+                border="1px solid transparent"
+                borderColor="transparent"
                 borderRadius={8}
                 fontSize="0.875rem"
-                maxW={124} type="search"
-                paddingStart={{ base: '32px', '2xl': '40px'}}
+                maxW={124}
+                type="search"
+                paddingStart={{ base: '32px', '2xl': '40px' }}
                 placeholder="Search"
-                _focus={{ backgroundColor: 'white', boxShadow: '0 0 0 4px rgb(234 76 137 / 10%)', borderColor: 'rgba(234,76,137,0.4)' }}
-                _hover={{ backgroundColor: 'white', boxShadow: '0 0 0 4px rgb(234 76 137 / 10%)' }} />
+                _focus={{
+                  backgroundColor: 'white',
+                  boxShadow: '0 0 0 4px rgb(234 76 137 / 10%)',
+                  borderColor: 'rgba(234,76,137,0.4)',
+                }}
+                _hover={{
+                  backgroundColor: 'white',
+                  boxShadow: '0 0 0 4px rgb(234 76 137 / 10%)',
+                }}
+              />
             </InputGroup>
           </ListItem>
           <ListItem marginInline="10px">
             <WorkIcon color="gray.400" cursor="pointer" h="20px" w="20px" />
           </ListItem>
           <ListItem marginInline="10px">
-          <ErrorBoundary fallback={<Avatar bgColor="blue.500" h="32px" name="A" src="https://bit.ly/tioluwani-kolawole" width="32px" /> }>
-              <Suspense fallback={ <Spinner /> }>
+            <ErrorBoundary
+              fallback={
+                <Avatar
+                  bgColor="blue.500"
+                  h="32px"
+                  name="A"
+                  src="https://bit.ly/tioluwani-kolawole"
+                  width="32px"
+                />
+              }
+            >
+              <Suspense fallback={<Spinner />}>
                 <UserImage />
               </Suspense>
-          </ErrorBoundary>
+            </ErrorBoundary>
           </ListItem>
           <ListItem marginInlineStart="10px">
-            <Button cursor="pointer" as={ReactLink} colorScheme="pink" fontSize="0.875rem" to="/uploads/new">Upload</Button>
+            <Button
+              cursor="pointer"
+              as={ReactLink}
+              colorScheme="pink"
+              fontSize="0.875rem"
+              to="/uploads/new"
+            >
+              Upload
+            </Button>
           </ListItem>
         </UnorderedList>
-
-
       </Flex>
     </>
-  )
+  );
 }

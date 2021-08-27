@@ -3,14 +3,17 @@
 } */
 
 img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
+.ts:hover + .box {
+  opacity: 1;
+}
 
 @media screen and (min-width: 1560px) {
-    html {
-        font-size: 20px;
-    }
+  html {
+    font-size: 20px;
+  }
 }

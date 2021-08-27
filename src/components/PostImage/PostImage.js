@@ -1,24 +1,31 @@
-import React from 'react'
+import { AspectRatio, Image } from '@chakra-ui/react';
+import React from 'react';
 
-export function PostImage({ url, post }) {
-    return (
-        'hola'
-        // <Box h={576}>
-        //     {
-        //         post.media.data[0].type === 'video/mp4' ?
-        //         <AspectRatio w="100%" h="100%" ratio={1}>
-        //             <iframe
-        //                 title="file"
-        //                 src={files.filesUrl[0]}
-        //                 allowFullScreen
-        //             />
-        //         </AspectRatio> :
-        //         <Image 
-        //             h="100%"
-        //             objectFit="cover"
-        //             src={url}
-        //             w="100%" />
-        //     }
-        // </Box>
-    )
+export function PostImage({ file }) {
+  return (
+    <>
+      {file.type === 'video/mp4' ? (
+        <AspectRatio
+          border="1px dashed"
+          borderColor="gray.500"
+          borderRadius="12px"
+          h="100px"
+          w="100px"
+        >
+          <video title="file" src={file.preview} allowFullScreen></video>
+        </AspectRatio>
+      ) : (
+        <Image
+          border="1px dashed"
+          borderColor="gray.500"
+          borderRadius="12px"
+          h="100px"
+          w="100px"
+          objectFit="cover"
+          data-src={file.preview}
+          src={file.preview}
+        />
+      )}
+    </>
+  );
 }

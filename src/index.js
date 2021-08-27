@@ -9,7 +9,7 @@ import './index.css';
 ReactDOM.render(
   <StrictMode>
     <ColorModeScript />
-       <App />
+    <App />
   </StrictMode>,
   document.getElementById('root')
 );
