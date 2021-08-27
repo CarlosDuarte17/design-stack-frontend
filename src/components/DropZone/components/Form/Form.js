@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Textarea, Image, Box, AspectRatio, Flex } from '@chakra-ui/react';
 
-export function Form({ files, inputTitleRef, inputDescriptionRef }) {
+import { UploadContext } from '../../contexts/UploadContext/UploadContext';
+
+export function Form() {
+  const { files, inputTitleRef, inputDescriptionRef } = useContext(UploadContext);
   return (
     <Box cursor="pointer" maxW="768px" mx="auto" marginBlockStart="32px">
       <Textarea

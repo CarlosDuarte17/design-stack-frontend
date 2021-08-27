@@ -16,9 +16,8 @@ export function Gallery({
   isLoading,
   isFetching,
   hasNextPage,
-  fetchNextPage
+  fetchNextPage,
 }) {
-
   if (isRefetchError || (data && data.message)) {
     return (
       <Alert marginBlockStart="20px" status="error">
@@ -75,36 +74,7 @@ export function Gallery({
       )}
     </React.Fragment>
   );
-
-  
-
-  // return (
-  //   <>
-  //     <Grid
-  //       marginBlockStart="36px"
-  //       grid-auto-rows="max-content"
-  //       templateColumns="repeat(auto-fill, minmax(274px, 1fr))"
-  //       gap="36px"
-  //     >
-  //       {state.posts.map(post => (
-  //         <PostItem key={post.id} post={post} />
-  //       ))}
-  //     </Grid>
-  //     {(isLoading || isFetching) && (
-  //       <Flex marginBlockStart="36px" display="flex" justifyContent="center">
-  //         <Spinner
-  //           size="xl"
-  //           emptyColor="gray.200"
-  //           color="pink.500"
-  //           thickness="4px"
-  //         />
-  //       </Flex>
-  //     )}
-  
-  //   </>
-  // );
 }
-
 
 // : (
 //   <Flex justifyContent="flex-end">

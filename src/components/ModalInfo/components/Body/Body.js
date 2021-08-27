@@ -44,7 +44,6 @@ export function Body({ post }) {
             h="100%"
             objectFit="cover"
             w="100%"
-            data-src={currentMedia.media}
             src={currentMedia.media}
           />
         )}
@@ -73,7 +72,7 @@ export function Body({ post }) {
                 _hover={{ borderColor: 'pink.500' }}
               >
                 <video
-                  src={media.mediaFullPath}
+                  src={media.FullPath}
                   onMouseOver={e => e.target.play()}
                   onMouseOut={e => e.target.pause()}
                   onClick={() =>

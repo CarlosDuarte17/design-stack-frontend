@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 
 import { Options, Upload, Form as PostForm } from './components';
 import { Box, Heading, Text } from '@chakra-ui/react';
+import { UploadContext } from './contexts/UploadContext/UploadContext';
 
 export function DropZone() {
   const [isSelectedImage, setIsSelectedImage] = useState(false);
@@ -14,13 +15,17 @@ export function DropZone() {
   });
 
   return (
-    <div>
-      <Options
-        inputTitleRef={inputTitleRef}
-        inputDescriptionRef={inputDescriptionRef}
-        isSelectedImage={isSelectedImage}
-        files={files}
-      />
+    <UploadContext.Provider
+      value={{
+        inputTitleRef,
+        inputDescriptionRef,
+        isSelectedImage,
+        files,
+        setFiles,
+        setIsSelectedImage
+      }}
+    >
+      <Options />
       <Box maxW="1024px" textAlign="center" mx="auto">
         {!isSelectedImage && (
           <>
@@ -34,15 +39,11 @@ export function DropZone() {
           </>
         )}
         {isSelectedImage ? (
-          <PostForm
-            inputTitleRef={inputTitleRef}
-            inputDescriptionRef={inputDescriptionRef}
-            files={files}
-          />
+          <PostForm />
         ) : (
-          <Upload setFiles={setFiles} setIsSelectedImage={setIsSelectedImage} />
+          <Upload />
         )}
       </Box>
-    </div>
+    </UploadContext.Provider>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
 
@@ -36,26 +36,31 @@ export function TagModal({
     },
   });
 
-  const handleUploadData = useCallback(
-    () => {
-      if (inputTagRef.current.value === '') {
-        return;
-      }
-
-      let formData = new FormData();
-      formData.append('title', inputTitleRef.current.value);
-      formData.append('description', inputDescriptionRef.current.value);
-      console.log(files.files);
-
-      for (const file of files.files) {
-        formData.append(`files[]`, file);
-      }
-      formData.append('tags', inputTagRef.current.value);
-
-      mutate(formData);
+  useEffect(
+    () => () => {
+      // Make sure to revoke the data uris to avoid memory leaks
+      files.urls?.map(url => URL.revokeObjectURL(files.urls));
     },
-    [files, mutate, inputTitleRef, inputDescriptionRef]
+    [files]
   );
+
+  const handleUploadData = useCallback(() => {
+    if (inputTagRef.current.value === '') {
+      return;
+    }
+
+    let formData = new FormData();
+    formData.append('title', inputTitleRef.current.value);
+    formData.append('description', inputDescriptionRef.current.value);
+    console.log(files.files);
+
+    for (const file of files.files) {
+      formData.append(`files[]`, file);
+    }
+    formData.append('tags', inputTagRef.current.value);
+
+    mutate(formData);
+  }, [files, mutate, inputTitleRef, inputDescriptionRef]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>

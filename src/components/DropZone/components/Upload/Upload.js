@@ -1,12 +1,14 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo, useCallback, useContext } from 'react';
 import { useDropzone } from 'react-dropzone';
 import imagePlaceHolder from '../../../../assets/images/image-placeholder.png';
 import { Flex, Image, Text } from '@chakra-ui/react';
 
 import { baseStyle, activeStyle, acceptStyle, rejectStyle } from './config';
 import { useCustomToast } from '../../../../hooks/useCustomToast';
+import { UploadContext } from '../../contexts/UploadContext/UploadContext';
 
-export function Upload({ setFiles, setIsSelectedImage }) {
+export function Upload() {
+  const { setFiles, setIsSelectedImage } = useContext(UploadContext);
   const { showToast } = useCustomToast();
   const {
     getRootProps,
@@ -48,7 +50,7 @@ export function Upload({ setFiles, setIsSelectedImage }) {
         files.push(file);
       }
       console.log(urls);
-      setFiles(prev => ({ files, filesUrl: urls }));
+      setFiles({ files, filesUrl: urls });
       setIsSelectedImage(true);
     },
     [setIsSelectedImage, setFiles, showToast]

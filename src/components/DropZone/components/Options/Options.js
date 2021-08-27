@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { useCallback, useContext } from 'react';
 import { Link as ReactLink } from 'react-router-dom';
 import { Flex, Box, Button, useDisclosure } from '@chakra-ui/react';
 
-import { TagModal } from './components';
-import { useCallback } from 'react';
 import { useCustomToast } from '../../../../hooks/useCustomToast';
+import { UploadContext } from '../../contexts/UploadContext/UploadContext';
 
-export function Options({
-  isSelectedImage,
-  files,
-  formData: data,
-  inputTitleRef,
-  inputDescriptionRef,
-}) {
+import { TagModal } from './components';
+export function Options() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { showToast } = useCustomToast();
+  const {
+    isSelectedImage,
+    files,
+    inputTitleRef,
+    inputDescriptionRef,
+  } = useContext(UploadContext)
 
   const handleShowModal = useCallback(() => {
     if (inputTitleRef.current.value.trim() === '') {
@@ -59,7 +59,6 @@ export function Options({
           <TagModal
             isOpen={isOpen}
             onClose={onClose}
-            data={data}
             files={files}
             inputTitleRef={inputTitleRef}
             inputDescriptionRef={inputDescriptionRef}

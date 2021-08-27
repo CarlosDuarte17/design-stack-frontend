@@ -19,7 +19,7 @@ export function PostByTag() {
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery(
-    'posts',
+    'postsByTag',
     ({ pageParam }) => getPostsByTag(tagInfo.data.id, pageParam),
     {
       enabled: !!tagInfo?.data.id,
