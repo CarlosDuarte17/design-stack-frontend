@@ -49,7 +49,6 @@ export function Upload() {
         urls.push(url);
         files.push(file);
       }
-      console.log(urls);
       setFiles({ files, filesUrl: urls });
       setIsSelectedImage(true);
     },

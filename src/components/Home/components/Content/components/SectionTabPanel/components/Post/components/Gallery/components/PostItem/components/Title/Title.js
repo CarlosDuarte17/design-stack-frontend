@@ -51,6 +51,7 @@ export function Title({ title, viewer_liked, handleLikePost }) {
             h="34px"
             minW="34px"
             color={viewer_liked ? 'pink.500' : 'gray.400'}
+            _hover={{ bgColor: 'none', color: 'pink.500' }}
           >
             <FontAwesomeIcon icon={faHeart} />
           </Button>

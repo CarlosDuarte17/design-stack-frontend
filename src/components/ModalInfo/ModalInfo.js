@@ -38,16 +38,16 @@ export function ModalInfo() {
     getPost(shot)
   );
 
-  // const { mutate } = useMutation(['like', post?.id], setLike, {
-  //   onSuccess: postUpdated => {
-  //     post.viewer_liked = postUpdated.data.viewer_liked;
-  //     post.likes = postUpdated.data.likes;
-  //   },
-  // });
+  const { mutate } = useMutation(['likePost', post?.id], setlikePost, {
+    onSuccess: postUpdated => {
+      post.data.viewer_liked = postUpdated.data.viewer_liked;
+      post.data.likes = postUpdated.data.likes;
+    },
+  });
 
-  // function handleLikePost() {
-  //   mutate(post?.id);
-  // }
+  function handleLikePost() {
+    mutate(post?.data.id);
+  }
 
   if (isLoading) {
     <h2>Loading....</h2>;
@@ -98,7 +98,12 @@ export function ModalInfo() {
                   onClick={onOpenTag}
                 />
                 <PostButton label="Save" icon={faFolderPlus} />
-                <PostButton label="Like" icon={faHeart} />
+                <PostButton
+                  label="Like"
+                  icon={faHeart}
+                  onClick={handleLikePost}
+                  viewer_liked={post?.data.viewer_liked}
+                />
               </Flex>
               <Body post={post?.data} />
             </Box>
